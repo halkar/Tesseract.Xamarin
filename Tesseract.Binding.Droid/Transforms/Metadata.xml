@@ -1,0 +1,3 @@
+<metadata>
+  <attr path="/api/package[@name='com.googlecode.leptonica.android']/class[@name='Pixa.PixIterator']/method[@name='next']" name="managedReturn">Java.Lang.Object</attr>
+</metadata>
