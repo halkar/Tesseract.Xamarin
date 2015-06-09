@@ -6,6 +6,10 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using XLabs.Platform.Services.Media;
 using XLabs.Platform.Device;
+using XLabs.Ioc;
+using Autofac;
+using XLabs.Ioc.Autofac;
+using Android.Content;
 
 namespace Tesseract.Forms.Test.Droid
 {
@@ -17,9 +21,15 @@ namespace Tesseract.Forms.Test.Droid
             base.OnCreate(bundle);
 
             Xamarin.Forms.Forms.Init(this, bundle);
-			var device = AndroidDevice.CurrentDevice;
-            DependencyService.Register<ITesseract, TesseractApi>();
-            DependencyService.Register<IMediaPicker, MediaPicker>();
+
+			var containerBuilder = new Autofac.ContainerBuilder();
+
+			containerBuilder.Register(c => this).As<Context>();
+			containerBuilder.RegisterType<MediaPicker> ().As<IMediaPicker> ();
+			containerBuilder.RegisterType<TesseractApi> ().As<ITesseractApi> ();
+
+			Resolver.SetResolver(new AutofacResolver(containerBuilder.Build()));
+
             LoadApplication(new App());
         }
     }

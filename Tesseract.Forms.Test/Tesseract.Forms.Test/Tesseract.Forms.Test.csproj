@@ -48,46 +48,43 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Tesseract\Tesseract.csproj">
-      <Project>{f39b9d88-09f7-4b04-9476-bf01a75e46de}</Project>
+      <Project>{F39B9D88-09F7-4B04-9476-BF01A75E46DE}</Project>
       <Name>Tesseract</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="ExifLib, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ExifLib, Version=1.0.1.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\packages\ExifLib.PCL.1.0.1\lib\portable-net45+sl50+win+WindowsPhoneApp81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\ExifLib.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="Xamarin.Forms.Core, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Xamarin.Forms.Core, Version=1.4.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\packages\Xamarin.Forms.1.4.2.6359\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="Xamarin.Forms.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Xamarin.Forms.Platform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\packages\Xamarin.Forms.1.4.2.6359\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="Xamarin.Forms.Xaml, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Xamarin.Forms.Xaml, Version=1.4.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\packages\Xamarin.Forms.1.4.2.6359\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="XLabs.Core, Version=2.0.5610.35386, Culture=neutral, PublicKeyToken=d65109b36e5040e4, processorArchitecture=MSIL">
+    <Reference Include="XLabs.Core, Version=2.0.5610.35386, Culture=neutral, PublicKeyToken=d65109b36e5040e4">
       <HintPath>..\..\packages\XLabs.Core.2.0.5610.2\lib\portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1\XLabs.Core.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="XLabs.Forms, Version=2.0.5610.35388, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="XLabs.Forms, Version=2.0.5610.35388, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\packages\XLabs.Forms.2.0.5610.2\lib\portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1\XLabs.Forms.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="XLabs.Ioc, Version=2.0.5610.35386, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="XLabs.Ioc, Version=2.0.5610.35386, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\packages\XLabs.IoC.2.0.5610.2\lib\portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1\XLabs.Ioc.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="XLabs.Platform, Version=2.0.5610.35386, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="XLabs.Platform, Version=2.0.5610.35386, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\packages\XLabs.Platform.2.0.5610.2\lib\portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1\XLabs.Platform.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="XLabs.Serialization, Version=2.0.5610.35386, Culture=neutral, PublicKeyToken=d65109b36e5040e4, processorArchitecture=MSIL">
+    <Reference Include="XLabs.Serialization, Version=2.0.5610.35386, Culture=neutral, PublicKeyToken=d65109b36e5040e4">
       <HintPath>..\..\packages\XLabs.Serialization.2.0.5610.2\lib\portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1\XLabs.Serialization.dll</HintPath>
-      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac">
+      <HintPath>..\..\packages\Autofac.3.5.2\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="XLabs.Ioc.Autofac">
+      <HintPath>..\..\packages\XLabs.IoC.Autofac.2.0.5610.2\lib\portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1\XLabs.Ioc.Autofac.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

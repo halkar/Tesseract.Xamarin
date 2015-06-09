@@ -97,10 +97,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Tesseract.Droid\Tesseract.Droid.csproj">
-      <Project>{75FE46B1-71EB-4525-89F9-278799B5C823}</Project>
-      <Name>Tesseract.Droid</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Tesseract\Tesseract.csproj">
       <Project>{F39B9D88-09F7-4B04-9476-BF01A75E46DE}</Project>
       <Name>Tesseract</Name>
@@ -108,6 +104,10 @@
     <ProjectReference Include="..\Tesseract.Forms.Test\Tesseract.Forms.Test.csproj">
       <Name>Tesseract.Forms.Test</Name>
       <Project>{ADCD6BCA-2092-4E62-B002-A5A4183B96A3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tesseract.iOS\Tesseract.iOS.csproj">
+      <Project>{E80589FC-5034-40A6-A946-4FF45513CB95}</Project>
+      <Name>Tesseract.iOS</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +177,12 @@
     </Reference>
     <Reference Include="XLabs.Forms">
       <HintPath>..\..\packages\XLabs.Forms.2.0.5610.2\lib\Xamarin.iOS10\XLabs.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac">
+      <HintPath>..\..\packages\Autofac.3.5.2\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="XLabs.Ioc.Autofac">
+      <HintPath>..\..\packages\XLabs.IoC.Autofac.2.0.5610.2\lib\portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1\XLabs.Ioc.Autofac.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

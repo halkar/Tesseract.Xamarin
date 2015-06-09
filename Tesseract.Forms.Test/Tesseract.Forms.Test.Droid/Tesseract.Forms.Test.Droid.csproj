@@ -16,11 +16,9 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <AndroidSupportedAbis>armeabi,armeabi-v7a,x86</AndroidSupportedAbis>
-    <AndroidStoreUncompressedFileExtensions />
     <MandroidI18n />
     <JavaMaximumHeapSize>
     </JavaMaximumHeapSize>
-    <JavaOptions />
     <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
     <NuGetPackageImportStamp>782e7849</NuGetPackageImportStamp>
   </PropertyGroup>
@@ -33,6 +31,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidSupportedAbis>armeabi;armeabi-v7a;x86</AndroidSupportedAbis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,6 +41,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <AndroidStoreUncompressedFileExtensions>
+    </AndroidStoreUncompressedFileExtensions>
+    <JavaOptions>
+    </JavaOptions>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -93,6 +96,12 @@
     <Reference Include="XLabs.Forms">
       <HintPath>..\..\packages\XLabs.Forms.2.0.5610.2\lib\MonoAndroid\XLabs.Forms.dll</HintPath>
     </Reference>
+    <Reference Include="Autofac">
+      <HintPath>..\..\packages\Autofac.3.5.2\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="XLabs.Ioc.Autofac">
+      <HintPath>..\..\packages\XLabs.IoC.Autofac.2.0.5610.2\lib\portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1\XLabs.Ioc.Autofac.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -109,15 +118,6 @@
     <AndroidResource Include="Resources\drawable-hdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
-    <AndroidResource Include="Resources\raw\tessdata\eng.cube.bigrams" />
-    <AndroidResource Include="Resources\raw\tessdata\eng.cube.fold" />
-    <AndroidResource Include="Resources\raw\tessdata\eng.cube.lm" />
-    <AndroidResource Include="Resources\raw\tessdata\eng.cube.nn" />
-    <AndroidResource Include="Resources\raw\tessdata\eng.cube.params" />
-    <AndroidResource Include="Resources\raw\tessdata\eng.cube.size" />
-    <AndroidResource Include="Resources\raw\tessdata\eng.cube.word-freq" />
-    <AndroidResource Include="Resources\raw\tessdata\eng.tesseract_cube.nn" />
-    <AndroidResource Include="Resources\raw\tessdata\eng.traineddata" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />
@@ -147,5 +147,16 @@
   -->
   <ItemGroup>
     <Folder Include="Resources\raw\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\tessdata\eng.traineddata" />
+    <AndroidAsset Include="Assets\tessdata\eng.cube.bigrams" />
+    <AndroidAsset Include="Assets\tessdata\eng.cube.fold" />
+    <AndroidAsset Include="Assets\tessdata\eng.cube.lm" />
+    <AndroidAsset Include="Assets\tessdata\eng.cube.nn" />
+    <AndroidAsset Include="Assets\tessdata\eng.cube.params" />
+    <AndroidAsset Include="Assets\tessdata\eng.cube.size" />
+    <AndroidAsset Include="Assets\tessdata\eng.cube.word-freq" />
+    <AndroidAsset Include="Assets\tessdata\eng.tesseract_cube.nn" />
   </ItemGroup>
 </Project>
