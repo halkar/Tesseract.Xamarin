@@ -1,32 +1,32 @@
 ﻿using Foundation;
 using UIKit;
-using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
-using XLabs.Platform.Services.Media;
 using Autofac;
-using XLabs.Ioc;
-using XLabs.Ioc.Autofac;
+using XLabs.Platform.Services.Media;
 using Tesseract.iOS;
+using XLabs.Ioc.Autofac;
+using XLabs.Ioc;
+using Xamarin;
 
 namespace Tesseract.Forms.Test.iOS
 {
-    // The UIApplicationDelegate for the application. This class is responsible for launching the 
-    // User Interface of the application, as well as listening (and optionally responding) to 
-    // application events from iOS.
-    [Register("AppDelegate")]
-    public partial class AppDelegate : FormsApplicationDelegate
-    {
-        //
-        // This method is invoked when the application has loaded and is ready to run. In this 
-        // method you should instantiate the window, load the UI into it and then make the window
-        // visible.
-        //
-        // You have 17 seconds to return from this method, or iOS will terminate your application.
-        //
-        public override bool FinishedLaunching(UIApplication app, NSDictionary options)
-        {
-            Xamarin.Forms.Forms.Init();
-            
+	// The UIApplicationDelegate for the application. This class is responsible for launching the
+	// User Interface of the application, as well as listening (and optionally responding) to application events from iOS.
+	[Register ("AppDelegate")]
+	public class AppDelegate : FormsApplicationDelegate
+	{
+		public override bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
+		{
+			// Override point for customization after application launch.
+			// If not required for your application you can safely delete this method
+
+			// Code to start the Xamarin Test Cloud Agent
+			#if ENABLE_TEST_CLOUD
+			Calabash.Start();
+			#endif
+
+			Xamarin.Forms.Forms.Init();
+
 			var containerBuilder = new Autofac.ContainerBuilder();
 
 			containerBuilder.RegisterType<MediaPicker> ().As<IMediaPicker> ();
@@ -34,7 +34,12 @@ namespace Tesseract.Forms.Test.iOS
 
 			Resolver.SetResolver(new AutofacResolver(containerBuilder.Build()));
 
-            return base.FinishedLaunching(app, options);
-        }
-    }
+			LoadApplication (new App ());
+
+			return base.FinishedLaunching(application, launchOptions);
+
+		}
+	}
 }
+
+

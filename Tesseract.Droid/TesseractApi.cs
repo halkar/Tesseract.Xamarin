@@ -40,6 +40,15 @@ namespace Tesseract.Droid
 			_api.SetImage(bitmap);
 		}
 
+		public void SetImage(Stream stream)
+		{
+			BitmapFactory.Options options = new BitmapFactory.Options();
+			options.InSampleSize = 4;
+
+			Bitmap bitmap = BitmapFactory.DecodeStream (stream);
+			_api.SetImage(bitmap);
+		}
+
 		public void SetImage(string path)
 	    {
 			BitmapFactory.Options options = new BitmapFactory.Options();

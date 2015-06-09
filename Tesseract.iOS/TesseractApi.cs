@@ -1,6 +1,7 @@
 ﻿using UIKit;
 using Foundation;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Tesseract.iOS
 {
@@ -24,7 +25,12 @@ namespace Tesseract.iOS
 
 		public void SetImage(byte[] data)
 		{
-//			_api.Image = new UIImage (path);
+			_api.Image = new UIImage (NSData.FromArray(data));
+		}
+
+		public void SetImage(Stream stream)
+		{
+			_api.Image = new UIImage (NSData.FromStream(stream));
 		}
 
 		public void SetImage(string path)
@@ -34,7 +40,7 @@ namespace Tesseract.iOS
 
 		public string Text
 		{
-			get { return null; }
+			get { return _api.RecognizedText; }
 		}
 
 	    public void Dispose()

@@ -22,9 +22,9 @@ namespace Tesseract.Forms.Test
         {
 			var init = await _tesseract.Init ("eng");
 			var result = await _mediaPicker.SelectPhotoAsync(new CameraMediaStorageOptions());
-			if(result.Path == null) 
+			if(result.Source == null) 
                 return;
-			_tesseract.SetImage(result.Path);
+			_tesseract.SetImage(result.Source);
 			Text.Text = _tesseract.Text;
         }
     }
