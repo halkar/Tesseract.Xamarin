@@ -27,8 +27,6 @@ namespace Tesseract.Forms.Test
 			var init = await _tesseract.Init ("eng");
 			await _tesseract.SetImage(result.Source);
 			TextLabel.Text = _tesseract.Text;
-			var results = _tesseract.Results ();
-			var res = result;
         }
 	}
 }
