@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using XLabs.Platform.Device;
 using XLabs.Platform.Services.Media;
 using XLabs.Ioc;
+using System.Threading.Tasks;
 
 namespace Tesseract.Forms.Test
 {
@@ -20,12 +21,14 @@ namespace Tesseract.Forms.Test
 
         private async void LoadImageButton_OnClicked(object sender, EventArgs e)
         {
-			var init = await _tesseract.Init ("eng");
 			var result = await _mediaPicker.SelectPhotoAsync(new CameraMediaStorageOptions());
 			if(result.Source == null) 
                 return;
-			_tesseract.SetImage(result.Source);
-			Text.Text = _tesseract.Text;
+			var init = await _tesseract.Init ("eng");
+			await _tesseract.SetImage(result.Source);
+			TextLabel.Text = _tesseract.Text;
+			var results = _tesseract.Results ();
+			var res = result;
         }
-    }
+	}
 }

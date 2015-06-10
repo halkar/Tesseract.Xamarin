@@ -4,6 +4,7 @@
              x:Class="Tesseract.Forms.Test.MainPage">
   <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="10">
     <Button Text="Load image" x:Name="LoadImageButton" Clicked="LoadImageButton_OnClicked"></Button>
-    <Label HorizontalOptions="Center" x:Name="Text" />
+    <Label HorizontalOptions="Center" x:Name="TextLabel" />
+    <Label HorizontalOptions="Center" x:Name="ProgressLabel" />
   </StackLayout>
 </ContentPage>

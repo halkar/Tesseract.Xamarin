@@ -1,101 +1,179 @@
-﻿using Android.Content;
-using Android.Graphics;
-using Com.Googlecode.Tesseract.Android;
-using Java.IO;
-using Android.Content.Res;
-using Android.Util;
+﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using System;
+using Android.Content;
+using Android.Content.Res;
+using Android.Graphics;
+using Android.Util;
+using Com.Googlecode.Tesseract.Android;
+using File = Java.IO.File;
+using Object = Java.Lang.Object;
+using System.Drawing;
+using System.Collections.Generic;
 
 namespace Tesseract.Droid
 {
-	public class TesseractApi : ITesseractApi
-	{
-		private readonly TessBaseAPI _api = new TessBaseAPI();
+    public class TesseractApi : ITesseractApi
+    {
+        private readonly TessBaseAPI _api;
 
-		private readonly Context _context;
+        private readonly Context _context;
 
-		public TesseractApi(Context context) {
-			_context = context;
-		}
+        public event EventHandler<ProgressEventArgs> Progress;
 
-		public async Task<bool> Init(string tessDataPath, string language)
-	    {
-			return _api.Init(tessDataPath, language);
-	    }
+        private readonly ProgressHandler _progressHandler = new ProgressHandler();
 
-		public async Task<bool> Init(string language)
+        public TesseractApi(Context context)
+        {
+            _context = context;
+            _progressHandler.Progress += (sender, e) => { OnProgress(e.Progress); };
+            _api = new TessBaseAPI(_progressHandler);
+        }
+
+        public Task<bool> Init(string tessDataPath, string language)
+        {
+            return Task.FromResult(_api.Init(tessDataPath, language));
+        }
+
+        public async Task<bool> Init(string language)
+        {
+            var path = await CopyAssets();
+            return _api.Init(path, language);
+        }
+
+        private static BitmapFactory.Options GetOptions()
+        {
+            return new BitmapFactory.Options {InSampleSize = 4};
+        }
+
+        public async Task SetImage(byte[] data)
+        {
+            var bitmap = await BitmapFactory.DecodeByteArrayAsync(data, 0, data.Length, GetOptions());
+            _api.SetImage(bitmap);
+        }
+
+        public async Task SetImage(string path)
+        {
+            Bitmap bitmap = await BitmapFactory.DecodeFileAsync(path, GetOptions());
+            _api.SetImage(bitmap);
+        }
+
+        public async Task SetImage(Stream stream)
+        {
+            Bitmap bitmap = await BitmapFactory.DecodeStreamAsync(stream);
+            _api.SetImage(bitmap);
+        }
+
+        public string Text
+        {
+            get { return _api.UTF8Text; }
+        }
+
+        public int ProgressValue { get; private set; }
+
+        public void Dispose()
+        {
+            _api.Dispose();
+        }
+
+		public List<Result> Results()
 		{
-			var path = await CopyAssets ();
-			return _api.Init(path, language);
+			var results = new List<Result> ();
+			var iterator = _api.ResultIterator;
+			iterator.Begin ();
+			do {
+				var result = new Result {
+					Confidence = iterator.Confidence (PageIteratorLevel.RIL_WORD),
+					Text = iterator.GetUTF8Text (PageIteratorLevel.RIL_WORD),
+					Box = iterator.GetBoundingBox (PageIteratorLevel.RIL_WORD)
+				};
+				results.Add (result);
+			} while (iterator.Next (PageIteratorLevel.RIL_WORD));
+			return results;
 		}
 
-		public void SetImage(byte[] data)
-		{
-			BitmapFactory.Options options = new BitmapFactory.Options();
-			options.InSampleSize = 4;
+        public void OnProgressValues(TessBaseAPI.ProgressValues progress)
+        {
+            OnProgress(progress.Percent);
+        }
 
-			Bitmap bitmap = BitmapFactory.DecodeByteArray(data, 0, data.Length, options);
-			_api.SetImage(bitmap);
-		}
+        private async Task<string> CopyAssets()
+        {
+            try
+            {
+                AssetManager assetManager = _context.Assets;
+                string[] files = assetManager.List("tessdata");
+                var file = _context.GetExternalFilesDir(null);
+                var tessdata = new File(_context.GetExternalFilesDir(null), "tessdata");
+                if (!tessdata.Exists())
+                {
+                    tessdata.Mkdir();
+                }
 
-		public void SetImage(Stream stream)
-		{
-			BitmapFactory.Options options = new BitmapFactory.Options();
-			options.InSampleSize = 4;
+                foreach (string filename in files)
+                {
+                    using (var inStream = assetManager.Open("tessdata/" + filename))
+                    {
+                        File outFile = new File(tessdata, filename);
+                        if (outFile.Exists())
+                        {
+                            outFile.Delete();
+                        }
+                        using (var outStream = new FileStream(outFile.AbsolutePath, FileMode.Create))
+                        {
+                            await inStream.CopyToAsync(outStream);
+                            await outStream.FlushAsync();
+                        }
+                    }
+                }
+                return file.AbsolutePath;
+            }
+            catch (Exception ex)
+            {
+                Log.Error("[TesseractApi]", ex.Message);
+            }
+            return null;
+        }
 
-			Bitmap bitmap = BitmapFactory.DecodeStream (stream);
-			_api.SetImage(bitmap);
-		}
+        protected virtual void OnProgress(int progress)
+        {
+            ProgressValue = progress;
+            var handler = Progress;
+            if (handler != null) handler(this, new ProgressEventArgs(progress));
+        }
 
-		public void SetImage(string path)
-	    {
-			BitmapFactory.Options options = new BitmapFactory.Options();
-			options.InSampleSize = 4;
+        private class ProgressHandler : Object, TessBaseAPI.IProgressNotifier
+        {
+            internal event EventHandler<ProgressEventArgs> Progress;
 
-			Bitmap bitmap = BitmapFactory.DecodeFile(path, options);
-			_api.SetImage(bitmap);
-	    }
+            public void OnProgressValues(TessBaseAPI.ProgressValues progress)
+            {
+                OnProgress(progress.Percent);
+            }
 
-		public string Text
-		{
-			get { return _api.UTF8Text; }
-		}
+            private void OnProgress(int progress)
+            {
+                var handler = Progress;
+                if (handler != null) handler(this, new ProgressEventArgs(progress));
+            }
+        }
+    }
 
-	    public void Dispose()
-	    {
-			_api.Dispose ();
-	    }
+	public static class PageIteratorLevel {
+		/** Block of text/image/separator line. */
+		public const int RIL_BLOCK = 0;
 
-		private async Task<string> CopyAssets() {
-			try {
-				AssetManager assetManager = _context.Assets;
-				string[] files = assetManager.List ("tessdata");
-				var file = _context.GetExternalFilesDir (null);
-				var tessdata = new Java.IO.File (_context.GetExternalFilesDir (null), "tessdata");
-				if (!tessdata.Exists ()) {
-					tessdata.Mkdir ();
-				}
+		/** Paragraph within a block. */
+		public const int RIL_PARA = 1;
 
-				foreach (string filename in files) {
-					using (var inStream = assetManager.Open ("tessdata/" + filename)) {
-						Java.IO.File outFile = new Java.IO.File (tessdata, filename);
-						if (outFile.Exists ()) {
-							outFile.Delete ();
-						}
-						using (var outStream = new FileStream (outFile.AbsolutePath, FileMode.Create)) {
-							await inStream.CopyToAsync (outStream);
-							await outStream.FlushAsync();
-						}
-					}
-				}
-				return file.AbsolutePath;
-			} catch (Exception ex) {
-				Log.Error ("[TesseractApi]", ex.Message);
-			}
-			return null;
-		}
-	}
+		/** Line within a paragraph. */
+		public const int RIL_TEXTLINE = 2;
+
+		/** Word within a text line. */
+		public const int RIL_WORD = 3;
+
+		/** Symbol/character within a word. */
+		public const int RIL_SYMBOL = 4;
+	};
 }
 

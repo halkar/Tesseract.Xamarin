@@ -57,7 +57,7 @@ namespace Tesseract.Binding.iOS
 		// @property (readonly, nonatomic) NSArray * getConfidenceByWord;
 		[Export ("getConfidenceByWord")]
 //		[Verify (StronglyTypedNSArray)]
-		NSObject[] GetConfidenceByWord { get; }
+		NSDictionary[] GetConfidenceByWord { get; }
 
 		// @property (readonly, nonatomic) NSArray * getConfidenceBySymbol;
 		[Export ("getConfidenceBySymbol")]
