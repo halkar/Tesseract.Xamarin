@@ -41,12 +41,12 @@
     <ObjcBindingApiDefinition Include="ApiDefinitions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StructsAndEnums.cs" />
-    <Compile Include="libTesseractOCR.linkwith.cs">
-      <DependentUpon>libTesseractOCR.a</DependentUpon>
+    <Compile Include="Tesseract.linkwith.cs">
+      <DependentUpon>Tesseract.a</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
   <ItemGroup>
-    <ObjcBindingNativeLibrary Include="libTesseractOCR.a" />
+    <ObjcBindingNativeLibrary Include="Tesseract.a" />
   </ItemGroup>
 </Project>
