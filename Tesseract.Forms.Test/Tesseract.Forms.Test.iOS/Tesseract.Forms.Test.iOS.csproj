@@ -112,6 +112,10 @@
       <Project>{E80589FC-5034-40A6-A946-4FF45513CB95}</Project>
       <Name>Tesseract.iOS</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Tesseract.Binding.iOS\Tesseract.Binding.iOS.csproj">
+      <Project>{0580A057-E0F9-432B-AD9C-964451F7DF54}</Project>
+      <Name>Tesseract.Binding.iOS</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
