@@ -23,6 +23,8 @@ namespace Tesseract.Droid
 
         private readonly ProgressHandler _progressHandler = new ProgressHandler();
 
+		public bool Initialized { get; private set; }
+
         public TesseractApi(Context context)
         {
             _context = context;
@@ -32,13 +34,17 @@ namespace Tesseract.Droid
 
         public Task<bool> Init(string tessDataPath, string language)
         {
-            return Task.FromResult(_api.Init(tessDataPath, language));
+			var result = _api.Init (tessDataPath, language);
+			Initialized = result;
+            return Task.FromResult (result);
         }
 
         public async Task<bool> Init(string language)
         {
             var path = await CopyAssets();
-            return _api.Init(path, language);
+			var result = _api.Init (path, language);
+			Initialized = result;
+			return result;
         }
 
         private static BitmapFactory.Options GetOptions()
@@ -78,14 +84,16 @@ namespace Tesseract.Droid
 
 		public List<Result> Results()
 		{
+			int[] boundingBox;
 			var results = new List<Result> ();
 			var iterator = _api.ResultIterator;
 			iterator.Begin ();
 			do {
+				boundingBox = iterator.GetBoundingBox (PageIteratorLevel.RIL_WORD);
 				var result = new Result {
 					Confidence = iterator.Confidence (PageIteratorLevel.RIL_WORD),
 					Text = iterator.GetUTF8Text (PageIteratorLevel.RIL_WORD),
-					Box = iterator.GetBoundingBox (PageIteratorLevel.RIL_WORD)
+					Box = new Rectangle(boundingBox[0], boundingBox[1], boundingBox[2], boundingBox[3])
 				};
 				results.Add (result);
 			} while (iterator.Next (PageIteratorLevel.RIL_WORD));

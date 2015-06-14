@@ -16,11 +16,12 @@ namespace Tesseract
 		int ProgressValue{ get; }
 	    event EventHandler<ProgressEventArgs> Progress;
 		List<Result> Results ();
+		bool Initialized { get; }
 	}
 
 	public class Result
 	{
-		public int[] Box { get; set; }
+		public Rectangle Box { get; set; }
 		public string Text { get; set; }
 		public float Confidence { get; set; }
 	}

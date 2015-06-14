@@ -15,10 +15,13 @@ namespace Tesseract.iOS
 
         public event EventHandler<ProgressEventArgs> Progress;
 
+		public bool Initialized { get; private set; }
+
         public Task<bool> Init(string tessDataPath, string language)
         {
             _api = new Tesseract.Binding.iOS.Tesseract(tessDataPath, language);
             _api.Init();
+			Initialized = true;
             return Task.FromResult(true);
         }
 
@@ -26,6 +29,7 @@ namespace Tesseract.iOS
         {
             _api = new Tesseract.Binding.iOS.Tesseract(language);
             _api.Init();
+			Initialized = true;
             return Task.FromResult(true);
         }
 
@@ -75,12 +79,12 @@ namespace Tesseract.iOS
 			return new Result {
 				Confidence = ((NSNumber)r ["confidence"]).FloatValue,
 				Text = ((NSMutableString)r ["text"]).ToString (),
-				Box = new int[] { 
+				Box = new Rectangle ( 
 					(int)rect.RectangleFValue.X, 
 					(int)rect.RectangleFValue.Y,
 					(int)rect.RectangleFValue.Width, 
 					(int)rect.RectangleFValue.Height
-				}
+				)
 			};
 		}
     }

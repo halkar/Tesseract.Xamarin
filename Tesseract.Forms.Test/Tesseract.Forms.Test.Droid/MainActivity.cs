@@ -10,6 +10,7 @@ using XLabs.Ioc;
 using Autofac;
 using XLabs.Ioc.Autofac;
 using Android.Content;
+using Android.Util;
 
 namespace Tesseract.Forms.Test.Droid
 {
