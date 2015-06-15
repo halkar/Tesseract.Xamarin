@@ -32,11 +32,11 @@ namespace Tesseract.Droid
             _api = new TessBaseAPI(_progressHandler);
         }
 
-        public Task<bool> Init(string tessDataPath, string language)
+		public async Task<bool> Init(string tessDataPath, string language)
         {
 			var result = _api.Init (tessDataPath, language);
 			Initialized = result;
-            return Task.FromResult (result);
+            return result;
         }
 
         public async Task<bool> Init(string language)

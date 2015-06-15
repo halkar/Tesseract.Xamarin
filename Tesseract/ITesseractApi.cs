@@ -13,8 +13,6 @@ namespace Tesseract
 		Task SetImage(byte[] data);
 		Task SetImage(Stream stream);
 		string Text { get; }
-		int ProgressValue{ get; }
-	    event EventHandler<ProgressEventArgs> Progress;
 		List<Result> Results ();
 		bool Initialized { get; }
 	}

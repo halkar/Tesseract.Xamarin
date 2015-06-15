@@ -17,20 +17,20 @@ namespace Tesseract.iOS
 
 		public bool Initialized { get; private set; }
 
-        public Task<bool> Init(string tessDataPath, string language)
+		public async Task<bool> Init(string tessDataPath, string language)
         {
             _api = new Tesseract.Binding.iOS.Tesseract(tessDataPath, language);
             _api.Init();
 			Initialized = true;
-            return Task.FromResult(true);
+            return true;
         }
 
-        public Task<bool> Init(string language)
+		public async Task<bool> Init(string language)
         {
             _api = new Tesseract.Binding.iOS.Tesseract(language);
             _api.Init();
 			Initialized = true;
-            return Task.FromResult(true);
+            return true;
         }
 
         public async Task SetImage(byte[] data)
