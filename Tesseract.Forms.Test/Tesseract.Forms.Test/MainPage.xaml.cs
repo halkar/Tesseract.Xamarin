@@ -5,6 +5,7 @@ using XLabs.Platform.Device;
 using XLabs.Platform.Services.Media;
 using XLabs.Ioc;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Tesseract.Forms.Test
 {
@@ -24,9 +25,32 @@ namespace Tesseract.Forms.Test
 			var result = await _mediaPicker.SelectPhotoAsync(new CameraMediaStorageOptions());
 			if(result.Source == null) 
                 return;
-			var init = await _tesseract.Init ("eng");
+			activityIndicator.IsRunning = true;
+			var initialised = await _tesseract.Init ("eng");
+			if (!initialised)
+				return;
 			await _tesseract.SetImage(result.Source);
+			activityIndicator.IsRunning = false;
 			TextLabel.Text = _tesseract.Text;
         }
+
+		private async void GetPhotoButton_OnClicked(object sender, EventArgs e)
+		{
+			try {
+			var result = await _mediaPicker.TakePhotoAsync(new CameraMediaStorageOptions());
+			if(result.Source == null) 
+				return;
+			activityIndicator.IsRunning = true;
+			var initialised = await _tesseract.Init ("eng");
+			if (!initialised)
+				return;
+			await _tesseract.SetImage(result.Source);
+			activityIndicator.IsRunning = false;
+			TextLabel.Text = _tesseract.Text;
+			}
+			catch(Exception ex) {
+				Debug.WriteLine (ex.Message);
+			}
+		}
 	}
 }

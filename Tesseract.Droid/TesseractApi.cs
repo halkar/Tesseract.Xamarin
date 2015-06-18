@@ -55,19 +55,19 @@ namespace Tesseract.Droid
         public async Task SetImage(byte[] data)
         {
             var bitmap = await BitmapFactory.DecodeByteArrayAsync(data, 0, data.Length, GetOptions());
-            _api.SetImage(bitmap);
+			await Task.Run (() => _api.SetImage (bitmap));
         }
 
         public async Task SetImage(string path)
         {
             Bitmap bitmap = await BitmapFactory.DecodeFileAsync(path, GetOptions());
-            _api.SetImage(bitmap);
+			await Task.Run (() => _api.SetImage (bitmap));
         }
 
         public async Task SetImage(Stream stream)
         {
             Bitmap bitmap = await BitmapFactory.DecodeStreamAsync(stream);
-            _api.SetImage(bitmap);
+			await Task.Run (() => _api.SetImage (bitmap));
         }
 
         public string Text
