@@ -42,15 +42,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
-    <Reference Include="Tesseract.Binding.Droid">
-      <HintPath>..\..\packages\Xamarin.Tesseract.0.1.3\lib\MonoAndroid10\Tesseract.Binding.Droid.dll</HintPath>
-    </Reference>
-    <Reference Include="Tesseract">
-      <HintPath>..\..\packages\Xamarin.Tesseract.0.1.3\lib\MonoAndroid10\Tesseract.dll</HintPath>
-    </Reference>
-    <Reference Include="Tesseract.Droid">
-      <HintPath>..\..\packages\Xamarin.Tesseract.0.1.3\lib\MonoAndroid10\Tesseract.Droid.dll</HintPath>
-    </Reference>
     <Reference Include="Autofac">
       <HintPath>..\..\packages\Autofac.3.5.2\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Autofac.dll</HintPath>
     </Reference>
@@ -97,8 +88,17 @@
     <Reference Include="XLabs.Forms">
       <HintPath>..\..\packages\XLabs.Forms.2.0.5610.2\lib\MonoAndroid\XLabs.Forms.dll</HintPath>
     </Reference>
+    <Reference Include="Tesseract.Binding.Droid">
+      <HintPath>..\..\packages\Xamarin.Tesseract.0.2.0\lib\MonoAndroid10\Tesseract.Binding.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="Tesseract">
+      <HintPath>..\..\packages\Xamarin.Tesseract.0.2.0\lib\MonoAndroid10\Tesseract.dll</HintPath>
+    </Reference>
+    <Reference Include="Tesseract.Droid">
+      <HintPath>..\..\packages\Xamarin.Tesseract.0.2.0\lib\MonoAndroid10\Tesseract.Droid.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.Android.Support.v4">
-      <HintPath>..\..\packages\Xamarin.Android.Support.v4.22.1.1.1\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
+      <HintPath>..\..\packages\Xamarin.Android.Support.v4.22.2.0.0\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

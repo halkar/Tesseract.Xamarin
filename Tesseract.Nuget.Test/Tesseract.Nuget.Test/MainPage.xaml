@@ -2,8 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Tesseract.Forms.Test.MainPage">
-  <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="10">
+ <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="10">
     <Button Text="Load image" x:Name="LoadImageButton" Clicked="LoadImageButton_OnClicked"></Button>
+    <Button Text="Get photo" x:Name="GetPhotoButton" Clicked="GetPhotoButton_OnClicked"></Button>
+    <ActivityIndicator x:Name="activityIndicator"></ActivityIndicator>
     <Label HorizontalOptions="Center" x:Name="TextLabel" />
     <Label HorizontalOptions="Center" x:Name="ProgressLabel" />
   </StackLayout>
