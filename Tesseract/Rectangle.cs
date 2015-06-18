@@ -7,7 +7,6 @@
 	using System.Globalization; 
 
 
-	[System.Runtime.InteropServices.ComVisible(true)]
 	public struct Rectangle { 
 
 		/// <include file="doc\Rectangle.uex" path="docs/doc[@for="Rectangle.Empty"]/*"> 
@@ -20,10 +19,10 @@
 		/// </devdoc> 
 		public static readonly Rectangle Empty = new Rectangle();
 
-		private int x; 
-		private int y;
-		private int width; 
-		private int height;
+		private float x; 
+		private float y;
+		private float width; 
+		private float height;
 
 		/// <include file="doc\Rectangle.uex" path="docs/doc[@for="Rectangle.Rectangle"]/*">
 		/// <devdoc> 
@@ -32,7 +31,7 @@
 		///       class with the specified location and size. 
 		///    </see></para>
 		/// </devdoc> 
-		public Rectangle(int x, int y, int width, int height) {
+		public Rectangle(float x, float y, float width, float height) {
 			this.x = x;
 			this.y = y;
 			this.width = width; 
@@ -45,7 +44,7 @@
 		///    the specified location and size. 
 		/// </see></devdoc>
 		// !! Not in C++ version 
-		public static Rectangle FromLTRB(int left, int top, int right, int bottom) {
+		public static Rectangle FromLTRB(float left, float top, float right, float bottom) {
 			return new Rectangle(left,
 				top,
 				right - left, 
@@ -57,7 +56,7 @@
 		///    Gets or sets the x-coordinate of the 
 		///    upper-left corner of the rectangular region defined by this <see cref="System.Drawing.Rectangle">.
 		/// </see></devdoc> 
-		public int X {
+		public float X {
 			get {
 				return x;
 			} 
@@ -71,7 +70,7 @@
 		///    Gets or sets the y-coordinate of the
 		///    upper-left corner of the rectangular region defined by this <see cref="System.Drawing.Rectangle">. 
 		/// </see></devdoc>
-		public int Y { 
+		public float Y { 
 			get { 
 				return y;
 			} 
@@ -85,7 +84,7 @@
 		///    Gets or sets the width of the rectangular
 		///    region defined by this <see cref="System.Drawing.Rectangle">. 
 		/// </see></devdoc>
-		public int Width {
+		public float Width {
 			get {
 				return width; 
 			}
@@ -99,7 +98,7 @@
 		///    Gets or sets the width of the rectangular 
 		///    region defined by this <see cref="System.Drawing.Rectangle">.
 		/// </see></devdoc> 
-		public int Height { 
+		public float Height { 
 			get {
 				return height; 
 			}
@@ -115,7 +114,7 @@
 		///       rectangular region defined by this <see cref="System.Drawing.Rectangle"> .
 		///    </see></para>
 		/// </devdoc> 
-		public int Left { 
+		public float Left { 
 			get { 
 				return X;
 			} 
@@ -127,7 +126,7 @@
 		///       rectangular region defined by this <see cref="System.Drawing.Rectangle">. 
 		///    </see></para> 
 		/// </devdoc>
-		public int Top {
+		public float Top {
 			get {
 				return Y;
 			} 
@@ -140,7 +139,7 @@
 		///       rectangular region defined by this <see cref="System.Drawing.Rectangle">.
 		///    </see></para>
 		/// </devdoc> 
-		public int Right { 
+		public float Right { 
 			get { 
 				return X + Width;
 			} 
@@ -153,7 +152,7 @@
 		///       rectangular region defined by this <see cref="System.Drawing.Rectangle">. 
 		///    </see></para>
 		/// </devdoc> 
-		public int Bottom {
+		public float Bottom {
 			get {
 				return Y + Height; 
 			}
@@ -221,11 +220,11 @@
 		/// <include file="doc\Rectangle.uex" path="docs/doc[@for="Rectangle.Contains"]/*">
 		/// <devdoc> 
 		///    <para> 
-		///       Determines if the specfied point is contained within the
+		///       Determines if the specfied pofloat is contained within the
 		///       rectangular region defined by this <see cref="System.Drawing.Rectangle"> . 
 		///    </see></para>
 		/// </devdoc>
-		public bool Contains(int x, int y) {
+		public bool Contains(float x, float y) {
 			return this.X <= x && 
 				x < this.X + this.Width &&
 				this.Y <= y && 
@@ -253,11 +252,11 @@
 		///    <para>[To be supplied.]</para>
 		/// </devdoc> 
 		public override int GetHashCode() {
-			return(int)((UInt32)X ^ 
-				(((UInt32)Y << 13) | ((UInt32)Y >> 19)) ^ 
+			return (int)((UInt32)X ^ 
+				(((UInt32)Y << 13) | ((UInt32)Y >> 19)) ^
 				(((UInt32)Width << 26) | ((UInt32)Width >>  6)) ^
-				(((UInt32)Height <<  7) | ((UInt32)Height >> 25))); 
-		}
+				(((UInt32)Height <<  7) | ((UInt32)Height >> 25)));
+		} 
 
 		/// <include file="doc\Rectangle.uex" path="docs/doc[@for="Rectangle.Inflate"]/*">
 		/// <devdoc> 
@@ -266,7 +265,7 @@
 		///       by the specified amount. 
 		///    </see></para>
 		/// </devdoc> 
-		public void Inflate(int width, int height) {
+		public void Inflate(float width, float height) {
 			this.X -= width;
 			this.Y -= height;
 			this.Width += 2*width; 
@@ -281,33 +280,33 @@
 		///    </see></para> 
 		/// </devdoc>
 		// !! Not in C++ 
-		public static Rectangle Inflate(Rectangle rect, int x, int y) { 
+		public static Rectangle Inflate(Rectangle rect, float x, float y) { 
 			Rectangle r = rect;
 			r.Inflate(x, y); 
 			return r;
 		}
 
-		/// <include file="doc\Rectangle.uex" path="docs/doc[@for="Rectangle.Intersect"]/*"> 
-		/// <devdoc> Creates a Rectangle that represents the intersection between this Rectangle and rect.
+		/// <include file="doc\Rectangle.uex" path="docs/doc[@for="Rectangle.floatersect"]/*"> 
+		/// <devdoc> Creates a Rectangle that represents the floatersection between this Rectangle and rect.
 		/// </devdoc> 
-		public void Intersect(Rectangle rect) { 
-			Rectangle result = Rectangle.Intersect(rect, this);
+		public void floatersect(Rectangle rect) { 
+			Rectangle result = Rectangle.floatersect(rect, this);
 
 			this.X = result.X;
 			this.Y = result.Y;
 			this.Width = result.Width;
 			this.Height = result.Height; 
 		}
-		/// <include file="doc\Rectangle.uex" path="docs/doc[@for="Rectangle.Intersect1"]/*"> 
+		/// <include file="doc\Rectangle.uex" path="docs/doc[@for="Rectangle.floatersect1"]/*"> 
 		/// <devdoc> 
-		///    Creates a rectangle that represents the intersetion between a and
-		///    b. If there is no intersection, null is returned. 
+		///    Creates a rectangle that represents the floatersetion between a and
+		///    b. If there is no floatersection, null is returned. 
 		/// </devdoc>
-		public static Rectangle Intersect(Rectangle a, Rectangle b) {
-			int x1 = Math.Max(a.X, b.X);
-			int x2 = Math.Min(a.X + a.Width, b.X + b.Width); 
-			int y1 = Math.Max(a.Y, b.Y);
-			int y2 = Math.Min(a.Y + a.Height, b.Y + b.Height); 
+		public static Rectangle floatersect(Rectangle a, Rectangle b) {
+			float x1 = Math.Max(a.X, b.X);
+			float x2 = Math.Min(a.X + a.Width, b.X + b.Width); 
+			float y1 = Math.Max(a.Y, b.Y);
+			float y2 = Math.Min(a.Y + a.Height, b.Y + b.Height); 
 
 			if (x2 >= x1
 				&& y2 >= y1) { 
@@ -317,11 +316,11 @@
 			return Rectangle.Empty; 
 		}
 
-		/// <include file="doc\Rectangle.uex" path="docs/doc[@for="Rectangle.IntersectsWith"]/*"> 
+		/// <include file="doc\Rectangle.uex" path="docs/doc[@for="Rectangle.floatersectsWith"]/*"> 
 		/// <devdoc>
-		///     Determines if this rectangle intersets with rect. 
+		///     Determines if this rectangle floatersets with rect. 
 		/// </devdoc>
-		public bool IntersectsWith(Rectangle rect) {
+		public bool floatersectsWith(Rectangle rect) {
 			return(rect.X < this.X + this.Width) &&
 				(this.X < (rect.X + rect.Width)) && 
 				(rect.Y < this.Y + this.Height) &&
@@ -336,10 +335,10 @@
 		///    </para>
 		/// </devdoc> 
 		public static Rectangle Union(Rectangle a, Rectangle b) { 
-			int x1 = Math.Min(a.X, b.X);
-			int x2 = Math.Max(a.X + a.Width, b.X + b.Width); 
-			int y1 = Math.Min(a.Y, b.Y);
-			int y2 = Math.Max(a.Y + a.Height, b.Y + b.Height);
+			float x1 = Math.Min(a.X, b.X);
+			float x2 = Math.Max(a.X + a.Width, b.X + b.Width); 
+			float y1 = Math.Min(a.Y, b.Y);
+			float y2 = Math.Max(a.Y + a.Height, b.Y + b.Height);
 
 			return new Rectangle(x1, y1, x2 - x1, y2 - y1); 
 		}
@@ -348,7 +347,7 @@
 		/// <devdoc> 
 		///    Adjusts the location of this rectangle by the specified amount.
 		/// </devdoc>
-		public void Offset(int x, int y) {
+		public void Offset(float x, float y) {
 			this.X += x; 
 			this.Y += y;
 		} 

@@ -32,11 +32,15 @@ namespace Tesseract.Forms.Test
 			await _tesseract.SetImage(result.Source);
 			activityIndicator.IsRunning = false;
 			TextLabel.Text = _tesseract.Text;
+			var words = _tesseract.Results (PageIteratorLevel.Word);
+			var symbols = _tesseract.Results (PageIteratorLevel.Symbol);
+			var blocks = _tesseract.Results (PageIteratorLevel.Block);
+			var paragraphs = _tesseract.Results (PageIteratorLevel.Paragraph);
+			var lines = _tesseract.Results (PageIteratorLevel.Textline);
         }
 
 		private async void GetPhotoButton_OnClicked(object sender, EventArgs e)
 		{
-			try {
 			var result = await _mediaPicker.TakePhotoAsync(new CameraMediaStorageOptions());
 			if(result.Source == null) 
 				return;
@@ -47,10 +51,11 @@ namespace Tesseract.Forms.Test
 			await _tesseract.SetImage(result.Source);
 			activityIndicator.IsRunning = false;
 			TextLabel.Text = _tesseract.Text;
-			}
-			catch(Exception ex) {
-				Debug.WriteLine (ex.Message);
-			}
+			var words = _tesseract.Results (PageIteratorLevel.Word);
+			var symbols = _tesseract.Results (PageIteratorLevel.Symbol);
+			var blocks = _tesseract.Results (PageIteratorLevel.Block);
+			var paragraphs = _tesseract.Results (PageIteratorLevel.Paragraph);
+			var lines = _tesseract.Results (PageIteratorLevel.Textline);
 		}
 	}
 }

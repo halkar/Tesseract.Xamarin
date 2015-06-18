@@ -6,32 +6,32 @@ using System;
 using System.Collections.Generic;
 using ObjCRuntime;
 using System.Linq;
+using Tesseract.Binding.iOS;
 
 namespace Tesseract.iOS
 {
     public class TesseractApi : ITesseractApi
     {
-        private Tesseract.Binding.iOS.Tesseract _api;
+		private Tesseract.Binding.iOS.G8Tesseract _api;
 
         public event EventHandler<ProgressEventArgs> Progress;
 
 		public bool Initialized { get; private set; }
 
-		public async Task<bool> Init(string tessDataPath, string language)
+		public async Task<bool> Init(string language)
         {
-            _api = new Tesseract.Binding.iOS.Tesseract(tessDataPath, language);
+			_api = new Tesseract.Binding.iOS.G8Tesseract(language);
             _api.Init();
 			Initialized = true;
             return true;
         }
 
-		public async Task<bool> Init(string language)
-        {
-            _api = new Tesseract.Binding.iOS.Tesseract(language);
-            _api.Init();
-			Initialized = true;
-            return true;
-        }
+		public async Task<bool> Init(string language, Tesseract.OCREngineMode mode)
+		{
+			await Init (language);
+			SetOcrEngineMode (mode);
+			return true;
+		}
 
         public async Task SetImage(byte[] data)
         {
@@ -58,7 +58,7 @@ namespace Tesseract.iOS
 
         public int ProgressValue
         {
-            get { return _api.Progress; }
+			get { return (int)_api.Progress; }
         }
 
         public void Dispose()
@@ -66,24 +66,104 @@ namespace Tesseract.iOS
             _api.Dispose();
         }
 
-		public List<Result> Results()
+		public void SetOcrEngineMode(Tesseract.OCREngineMode mode)
 		{
-			return this._api.GetConfidenceByWord
+			switch (mode)
+			{
+				case OCREngineMode.CubeOnly:
+					_api.EngineMode = G8OCREngineMode.CubeOnly;
+					break;
+				case OCREngineMode.TesseractCubeCombined:
+					_api.EngineMode = G8OCREngineMode.TesseractCubeCombined;
+					break;
+				case OCREngineMode.TesseractOnly:
+					_api.EngineMode = G8OCREngineMode.TesseractOnly;
+					break;
+			}
+		}
+
+		public void SetPageSegmentationMode(Tesseract.PageSegmentationMode mode)
+		{
+			switch (mode)
+			{
+				case PageSegmentationMode.Auto:
+					_api.PageSegmentationMode = G8PageSegmentationMode.Auto;
+					break;
+				case PageSegmentationMode.AutoOnly:
+					_api.PageSegmentationMode = G8PageSegmentationMode.AutoOnly;
+					break;
+				case PageSegmentationMode.AutoOSD:
+					_api.PageSegmentationMode = G8PageSegmentationMode.AutoOSD;
+					break;
+				case PageSegmentationMode.CircleWord:
+					_api.PageSegmentationMode = G8PageSegmentationMode.CircleWord;
+					break;
+				case PageSegmentationMode.OSDOnly:
+					_api.PageSegmentationMode = G8PageSegmentationMode.OSDOnly;
+					break;
+				case PageSegmentationMode.SingleBlock:
+					_api.PageSegmentationMode = G8PageSegmentationMode.SingleBlock;
+					break;
+				case PageSegmentationMode.SingleBlockVertText:
+					_api.PageSegmentationMode = G8PageSegmentationMode.SingleBlockVertText;
+					break;
+				case PageSegmentationMode.SingleChar:
+					_api.PageSegmentationMode = G8PageSegmentationMode.SingleChar;
+					break;
+				case PageSegmentationMode.SingleColumn:
+					_api.PageSegmentationMode = G8PageSegmentationMode.SingleColumn;
+					break;
+				case PageSegmentationMode.SingleLine:
+					_api.PageSegmentationMode = G8PageSegmentationMode.SingleLine;
+					break;
+				case PageSegmentationMode.SingleWord:
+					_api.PageSegmentationMode = G8PageSegmentationMode.SingleWord;
+					break;
+				case PageSegmentationMode.SparseText:
+					_api.PageSegmentationMode = G8PageSegmentationMode.SparseText;
+					break;
+				case PageSegmentationMode.SparseTextOSD:
+					_api.PageSegmentationMode = G8PageSegmentationMode.SparseTextOSD;
+					break;
+			}
+		}
+
+		public List<Result> Results(Tesseract.PageIteratorLevel level)
+		{
+			var pageIterationLevel = GetPageIteratorLevel(level);
+			return this._api.RecognizedBlocksByIteratorLevel (pageIterationLevel)
 				.Select (r => ConvertToResult (r))
 				.ToList ();
 		}
 
-		Result ConvertToResult (NSDictionary r)
+		G8PageIteratorLevel GetPageIteratorLevel (Tesseract.PageIteratorLevel level)
 		{
-			var rect = (NSValue)r ["boundingbox"];
+			switch (level) {
+				case Tesseract.PageIteratorLevel.Block:
+					return G8PageIteratorLevel.Block;
+				case Tesseract.PageIteratorLevel.Paragraph:
+					return G8PageIteratorLevel.Paragraph;
+				case Tesseract.PageIteratorLevel.Symbol:
+					return G8PageIteratorLevel.Symbol;
+				case Tesseract.PageIteratorLevel.Textline:
+					return G8PageIteratorLevel.Textline;
+				case Tesseract.PageIteratorLevel.Word:
+					return G8PageIteratorLevel.Word;
+				default:
+					return G8PageIteratorLevel.Word;
+			}
+		}
+
+		Result ConvertToResult (G8RecognizedBlock r)
+		{
 			return new Result {
-				Confidence = ((NSNumber)r ["confidence"]).FloatValue,
-				Text = ((NSMutableString)r ["text"]).ToString (),
+				Confidence = (float)r.Confidence,
+				Text = r.Text,
 				Box = new Rectangle ( 
-					(int)rect.RectangleFValue.X, 
-					(int)rect.RectangleFValue.Y,
-					(int)rect.RectangleFValue.Width, 
-					(int)rect.RectangleFValue.Height
+					(float)r.BoundingBox.X, 
+					(float)r.BoundingBox.Y,
+					(float)r.BoundingBox.Width, 
+					(float)r.BoundingBox.Height
 				)
 			};
 		}
