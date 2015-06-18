@@ -18,19 +18,19 @@ namespace Tesseract.iOS
 
 		public bool Initialized { get; private set; }
 
-		public async Task<bool> Init(string language)
-        {
-			_api = new Tesseract.Binding.iOS.G8Tesseract(language);
-            _api.Init();
-			Initialized = true;
-            return true;
-        }
-
-		public async Task<bool> Init(string language, Tesseract.OCREngineMode mode)
+        public async Task<bool> Init(string language, OCREngineMode? mode = null)
 		{
-			await Init (language);
-			SetOcrEngineMode (mode);
-			return true;
+			try {
+				_api = new Tesseract.Binding.iOS.G8Tesseract (language);
+				_api.Init ();
+				if (mode.HasValue)
+					SetOcrEngineMode (mode.Value);
+				Initialized = true;
+			} catch {
+				Initialized = false;
+
+			}
+			return Initialized;
 		}
 
         public async Task SetImage(byte[] data)

@@ -5,60 +5,44 @@ using System.Collections.Generic;
 
 namespace Tesseract
 {
+    /// <summary>
+    /// Base interface for accessing all Tesseract OCR functionality.
+    /// </summary>
 	public interface ITesseractApi : IDisposable
 	{
-		Task<bool> Init(string lang);
-		Task<bool> Init(string lang, OCREngineMode mode);
+        /// <summary>
+        /// Initialise Tesseract OCR. This method should be called before using Tesseract.
+        /// </summary>
+        Task<bool> Init(string lang, OCREngineMode? mode = null);
+        /// <summary>
+        /// Recognise image.
+        /// </summary>
 		Task SetImage(string path);
+        /// <summary>
+        /// Recognise image.
+        /// </summary>
 		Task SetImage(byte[] data);
+        /// <summary>
+        /// Recognise image.
+        /// </summary>
 		Task SetImage(Stream stream);
+        /// <summary>
+        /// Get all recognised text in one block.
+        /// </summary>
 		string Text { get; }
+        /// <summary>
+        /// Get all results.
+        /// </summary>
+        /// <param name="level">Block, paragraph, line, word, symbol</param>
 		List<Result> Results (PageIteratorLevel level);
+        /// <summary>
+        /// Is library initialised.
+        /// </summary>
 		bool Initialized { get; }
+        /// <summary>
+        /// Set page segmentation mode.
+        /// </summary>
 		void SetPageSegmentationMode (PageSegmentationMode mode);
-	}
-
-	public class Result
-	{
-		/// <summary>
-		/// For Android Box is in pixels, in iOS it's in fractions.
-		/// </summary>
-		public Rectangle Box { get; set; }
-		public string Text { get; set; }
-		public float Confidence { get; set; }
-	}
-
-	public enum PageIteratorLevel
-	{
-		Block,
-		Paragraph,
-		Textline,
-		Word,
-		Symbol
-	}
-
-	public enum PageSegmentationMode
-	{
-		OSDOnly,
-		AutoOSD,
-		AutoOnly,
-		Auto,
-		SingleColumn,
-		SingleBlockVertText,
-		SingleBlock,
-		SingleLine,
-		SingleWord,
-		CircleWord,
-		SingleChar,
-		SparseText,
-		SparseTextOSD
-	}
-
-	public enum OCREngineMode
-	{
-		TesseractOnly,
-		CubeOnly,
-		TesseractCubeCombined
 	}
 }
 

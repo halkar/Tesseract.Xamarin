@@ -39,21 +39,15 @@ namespace Tesseract.Droid
             return result;
         }
 
-        public async Task<bool> Init(string language)
+        public async Task<bool> Init(string language, Tesseract.OCREngineMode? mode = null)
         {
             var path = await CopyAssets();
-			var result = _api.Init (path, language);
+            var result = mode.HasValue
+                ? _api.Init(path, language, GetOcrEngineMode(mode.Value))
+                : _api.Init(path, language);
 			Initialized = result;
 			return result;
         }
-
-		public async Task<bool> Init(string language, Tesseract.OCREngineMode mode)
-		{
-			var path = await CopyAssets();
-			var result = _api.Init (path, language, GetOcrEngineMode(mode));
-			Initialized = result;
-			return result;
-		}
 
         private static BitmapFactory.Options GetOptions()
         {
