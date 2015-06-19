@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -125,12 +125,6 @@
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.1.4.2.6359\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.1.4.2.6359\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <ItemGroup>
-    <ProjectReference Include="..\Tesseract.Nuget.Test\Tesseract.Nuget.Test.csproj">
-      <Project>{877E7EFD-190B-462F-8AD9-14D3984CEF0C}</Project>
-      <Name>Tesseract.Nuget.Test</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <AndroidAsset Include="Assets\tessdata\eng.cube.bigrams" />
     <AndroidAsset Include="Assets\tessdata\eng.cube.fold" />
     <AndroidAsset Include="Assets\tessdata\eng.cube.lm" />
@@ -140,5 +134,11 @@
     <AndroidAsset Include="Assets\tessdata\eng.cube.word-freq" />
     <AndroidAsset Include="Assets\tessdata\eng.tesseract_cube.nn" />
     <AndroidAsset Include="Assets\tessdata\eng.traineddata" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tesseract.Nuget.Test\Tesseract.Nuget.Test.csproj">
+      <Project>{877E7EFD-190B-462F-8AD9-14D3984CEF0C}</Project>
+      <Name>Tesseract.Nuget.Test</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
