@@ -17,6 +17,8 @@ namespace Tesseract.Droid
     {
         private readonly TessBaseAPI _api;
 
+		private volatile bool _busy;
+
         private readonly Context _context;
 
         public event EventHandler<ProgressEventArgs> Progress;
@@ -54,23 +56,39 @@ namespace Tesseract.Droid
             return new BitmapFactory.Options {InSampleSize = 4};
         }
 
-        public async Task SetImage(byte[] data)
+		public async Task<bool> SetImage(byte[] data)
         {
-            var bitmap = await BitmapFactory.DecodeByteArrayAsync(data, 0, data.Length, GetOptions());
-			await Task.Run (() => _api.SetImage (bitmap));
+			using (var bitmap = await BitmapFactory.DecodeByteArrayAsync (data, 0, data.Length, GetOptions ())) {
+				return await Recognise (bitmap);
+			}
         }
 
-        public async Task SetImage(string path)
+		public async Task<bool> SetImage(string path)
+		{
+			using (Bitmap bitmap = await BitmapFactory.DecodeFileAsync (path, GetOptions ())) {
+				return await Recognise (bitmap);
+			}
+		}
+
+		public async Task<bool> SetImage(Stream stream)
         {
-            Bitmap bitmap = await BitmapFactory.DecodeFileAsync(path, GetOptions());
-			await Task.Run (() => _api.SetImage (bitmap));
+			using (Bitmap bitmap = await BitmapFactory.DecodeStreamAsync (stream)) {
+				return await Recognise (bitmap);
+			}
         }
 
-        public async Task SetImage(Stream stream)
-        {
-            Bitmap bitmap = await BitmapFactory.DecodeStreamAsync(stream);
-			await Task.Run (() => _api.SetImage (bitmap));
-        }
+		private async Task<bool> Recognise (Bitmap bitmap)
+		{
+			if (_busy)
+				return false;
+			_busy = true;
+			try {
+				await Task.Run (() => _api.SetImage (bitmap));
+				return true;
+			} finally {
+				_busy = false;
+			}
+		}
 
 		int GetOcrEngineMode (OCREngineMode mode)
 		{

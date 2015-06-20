@@ -17,15 +17,15 @@ namespace Tesseract
         /// <summary>
         /// Recognise image.
         /// </summary>
-		Task SetImage(string path);
+		Task<bool> SetImage(string path);
         /// <summary>
         /// Recognise image.
         /// </summary>
-		Task SetImage(byte[] data);
+		Task<bool> SetImage(byte[] data);
         /// <summary>
         /// Recognise image.
         /// </summary>
-		Task SetImage(Stream stream);
+		Task<bool> SetImage(Stream stream);
         /// <summary>
         /// Get all recognised text in one block.
         /// </summary>

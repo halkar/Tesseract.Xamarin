@@ -36,14 +36,20 @@ namespace Tesseract.Forms.Test
 		{
 			if (result.Source == null)
 				return;
-			activityIndicator.IsRunning = true;
-			if (!_tesseract.Initialized) {
-				var initialised = await _tesseract.Init ("eng");
-				if (!initialised)
+			try {
+				activityIndicator.IsRunning = true;
+				if (!_tesseract.Initialized) {
+					var initialised = await _tesseract.Init ("eng");
+					if (!initialised)
+						return;
+				}
+				if (!await _tesseract.SetImage (result.Source))
 					return;
+			} catch (Exception ex) {
+				DisplayAlert ("Error", ex.Message, "Cancel");
+			} finally {
+				activityIndicator.IsRunning = false;
 			}
-			await _tesseract.SetImage (result.Source);
-			activityIndicator.IsRunning = false;
 			TextLabel.Text = _tesseract.Text;
 			var words = _tesseract.Results (PageIteratorLevel.Word);
 			var symbols = _tesseract.Results (PageIteratorLevel.Symbol);

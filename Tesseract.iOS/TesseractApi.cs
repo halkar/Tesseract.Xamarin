@@ -14,6 +14,8 @@ namespace Tesseract.iOS
     {
 		private Tesseract.Binding.iOS.G8Tesseract _api;
 
+		private volatile bool _busy;
+
         public event EventHandler<ProgressEventArgs> Progress;
 
 		public bool Initialized { get; private set; }
@@ -33,23 +35,40 @@ namespace Tesseract.iOS
 			return Initialized;
 		}
 
-        public async Task SetImage(byte[] data)
+		public async Task<bool> SetImage(byte[] data)
         {
-            _api.Image = new UIImage(NSData.FromArray(data));
-            _api.Recognize();
+			using (var uIImage = new UIImage (NSData.FromArray (data))) {
+				return Recognise (uIImage);
+			}
         }
 
-        public async Task SetImage(Stream stream)
+		public async Task<bool> SetImage(Stream stream)
         {
-            _api.Image = new UIImage(NSData.FromStream(stream));
-            _api.Recognize();
+			using (var uIImage = new UIImage (NSData.FromStream (stream))) {
+				return Recognise (uIImage);
+			}
         }
 
-        public async Task SetImage(string path)
+		public async Task<bool> SetImage(string path)
         {
-            _api.Image = new UIImage(path);
-            _api.Recognize();
+			using (var uIImage = new UIImage (path)) {
+				return Recognise (uIImage);
+			}
         }
+
+		private bool Recognise (UIImage image)
+		{
+			if (_busy)
+				return false;
+			_busy = true;
+			try {
+				_api.Image = image;
+				_api.Recognize ();
+				return true;
+			} finally {
+				_busy = false;
+			}
+		}
 
         public string Text
         {
