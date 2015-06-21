@@ -2,8 +2,8 @@
 {
     public enum PageSegmentationMode
     {
-        OSDOnly,
-        AutoOSD,
+        OsdOnly,
+        AutoOsd,
         AutoOnly,
         Auto,
         SingleColumn,
@@ -14,6 +14,6 @@
         CircleWord,
         SingleChar,
         SparseText,
-        SparseTextOSD
+        SparseTextOsd
     }
 }

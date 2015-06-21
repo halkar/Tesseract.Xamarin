@@ -1,6 +1,6 @@
 ﻿namespace Tesseract
 {
-    public enum OCREngineMode
+    public enum OcrEngineMode
     {
 		/// <summary>
 		/// Run Tesseract only - fastest

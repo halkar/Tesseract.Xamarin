@@ -44,7 +44,10 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Resources\Resource.Designer.cs" />
+    <Compile Include="OcrMode.cs" />
+    <Compile Include="PageIteratorLevel.cs" />
+    <Compile Include="PageSegMode.cs" />
+    <Compile Include="Resources\Resource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TesseractApi.cs" />
   </ItemGroup>
