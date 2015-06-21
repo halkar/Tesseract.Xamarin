@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{45FA482C-8931-48B8-AFEC-1FA62D9F7122}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Tesseract.iOS.Test</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>Tesseract.iOS.Test</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchArch>i386</MtouchArch>
+    <MtouchLink>None</MtouchLink>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchProfiling>true</MtouchProfiling>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <ConsolePause>false</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>i386</MtouchArch>
+    <ConsolePause>false</ConsolePause>
+    <MtouchLink>None</MtouchLink>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchProfiling>true</MtouchProfiling>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="MonoTouch.NUnitLite" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+    <Folder Include="Resources\tessdata\" />
+    <Folder Include="samples\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+    <None Include="Entitlements.plist" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="UnitTestAppDelegate.cs" />
+    <Compile Include="TesseractApiRecogniseTest.cs" />
+    <Compile Include="TesseractApiInitTest.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <ItemGroup>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.bigrams">
+      <Link>Resources\tessdata\eng.cube.bigrams</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.fold">
+      <Link>Resources\tessdata\eng.cube.fold</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.lm">
+      <Link>Resources\tessdata\eng.cube.lm</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.nn">
+      <Link>Resources\tessdata\eng.cube.nn</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.params">
+      <Link>Resources\tessdata\eng.cube.params</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.size">
+      <Link>Resources\tessdata\eng.cube.size</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.word-freq">
+      <Link>Resources\tessdata\eng.cube.word-freq</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\eng.tesseract_cube.nn">
+      <Link>Resources\tessdata\eng.tesseract_cube.nn</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\eng.traineddata">
+      <Link>Resources\tessdata\eng.traineddata</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\rus.cube.size">
+      <Link>Resources\tessdata\rus.cube.size</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\rus.traineddata">
+      <Link>Resources\tessdata\rus.traineddata</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\rus.cube.fold">
+      <Link>Resources\tessdata\rus.cube.fold</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\rus.cube.lm">
+      <Link>Resources\tessdata\rus.cube.lm</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\rus.cube.nn">
+      <Link>Resources\tessdata\rus.cube.nn</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\rus.cube.params">
+      <Link>Resources\tessdata\rus.cube.params</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\rus.cube.word-freq">
+      <Link>Resources\tessdata\rus.cube.word-freq</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\samples\sample2.png">
+      <Link>samples\sample2.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\samples\sample1.jpg">
+      <Link>samples\sample1.jpg</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\samples\sample3.png">
+      <Link>samples\sample3.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\samples\sample4.jpg">
+      <Link>samples\sample4.jpg</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\samples\sample5.gif">
+      <Link>samples\sample5.gif</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\samples\sample6.jpg">
+      <Link>samples\sample6.jpg</Link>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Tesseract\Tesseract.csproj">
+      <Project>{F39B9D88-09F7-4B04-9476-BF01A75E46DE}</Project>
+      <Name>Tesseract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tesseract.Binding.iOS\Tesseract.Binding.iOS.csproj">
+      <Project>{0580A057-E0F9-432B-AD9C-964451F7DF54}</Project>
+      <Name>Tesseract.Binding.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tesseract.iOS\Tesseract.iOS.csproj">
+      <Project>{E80589FC-5034-40A6-A946-4FF45513CB95}</Project>
+      <Name>Tesseract.iOS</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
