@@ -17,6 +17,7 @@ namespace Tesseract.Droid
         private readonly ProgressHandler _progressHandler = new ProgressHandler();
         private TessBaseAPI _api;
         private volatile bool _busy;
+		public string Text { get; private set; }
 
         public TesseractApi(Context context)
         {
@@ -108,11 +109,6 @@ namespace Tesseract.Droid
             }
         }
 
-        public string Text
-        {
-            get { return _api.UTF8Text; }
-        }
-
         public void Dispose()
         {
             if (_api != null)
@@ -124,10 +120,13 @@ namespace Tesseract.Droid
 
         public List<Result> Results(Tesseract.PageIteratorLevel level)
         {
+			
             var pageIteratorLevel = GetPageIteratorLevel(level);
             int[] boundingBox;
             var results = new List<Result>();
-            var iterator = _api.ResultIterator;
+			var iterator = _api.ResultIterator;
+			if (iterator == null)
+				return new List<Result>();
             iterator.Begin();
             do
             {
@@ -165,6 +164,7 @@ namespace Tesseract.Droid
             try
             {
                 await Task.Run(() => _api.SetImage(bitmap));
+				await Task.Run(() => Text = _api.UTF8Text);
                 return true;
             }
             finally

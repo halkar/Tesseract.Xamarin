@@ -45,8 +45,10 @@ namespace Tesseract.Test.Droid
 				return;
 			syncObj = true;
 			await _api.SetImage (ConvertYuvToJpeg (data, camera));
-			var text = _api.Text;
-			Log.Debug ("[TextureViewActivity]", text);
+			var results = _api.Results (PageIteratorLevel.Word);
+			foreach (var result in results) {
+				Log.Debug ("TextureViewActivity", "Word: \"{0}\", confidence: {1}", result.Text, result.Confidence);
+			}
 			syncObj = false;
 		}
 
