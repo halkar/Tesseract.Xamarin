@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{F233F474-E161-4D38-9078-2BCDAF0F1207}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Tesseract.Droid.Test</RootNamespace>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AndroidApplication>True</AndroidApplication>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+    <AssemblyName>Tesseract.Droid.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Android" />
+    <Reference Include="Xamarin.Android.NUnitLite" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MainActivity.cs" />
+    <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TesseractApiInitTest.cs" />
+    <Compile Include="TesseractApiRecogniseTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Assets\AboutAssets.txt" />
+    <None Include="Properties\AndroidManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\Icon.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Assets\tessdata\" />
+    <Folder Include="samples\" />
+    <Folder Include="amples\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.bigrams">
+      <Link>Assets\tessdata\eng.cube.bigrams</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.fold">
+      <Link>Assets\tessdata\eng.cube.fold</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.lm">
+      <Link>Assets\tessdata\eng.cube.lm</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.nn">
+      <Link>Assets\tessdata\eng.cube.nn</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.params">
+      <Link>Assets\tessdata\eng.cube.params</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.size">
+      <Link>Assets\tessdata\eng.cube.size</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.word-freq">
+      <Link>Assets\tessdata\eng.cube.word-freq</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\eng.tesseract_cube.nn">
+      <Link>Assets\tessdata\eng.tesseract_cube.nn</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\eng.traineddata">
+      <Link>Assets\tessdata\eng.traineddata</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\rus.traineddata">
+      <Link>Assets\tessdata\rus.traineddata</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\rus.cube.size">
+      <Link>Assets\tessdata\rus.cube.size</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\rus.cube.word-freq">
+      <Link>Assets\tessdata\rus.cube.word-freq</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\rus.cube.fold">
+      <Link>Assets\tessdata\rus.cube.fold</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\rus.cube.lm">
+      <Link>Assets\tessdata\rus.cube.lm</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\rus.cube.nn">
+      <Link>Assets\tessdata\rus.cube.nn</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\rus.cube.params">
+      <Link>Assets\tessdata\rus.cube.params</Link>
+    </AndroidAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Tesseract\Tesseract.csproj">
+      <Project>{F39B9D88-09F7-4B04-9476-BF01A75E46DE}</Project>
+      <Name>Tesseract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tesseract.Binding.Droid\Tesseract.Binding.Droid.csproj">
+      <Project>{F943CAFB-0FF9-46A8-8698-95F0BE6E3A86}</Project>
+      <Name>Tesseract.Binding.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tesseract.Droid\Tesseract.Droid.csproj">
+      <Project>{75FE46B1-71EB-4525-89F9-278799B5C823}</Project>
+      <Name>Tesseract.Droid</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\samples\sample1.jpg">
+      <Link>samples\sample1.jpg</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\samples\sample2.png">
+      <Link>samples\sample2.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\samples\sample3.png">
+      <Link>samples\sample3.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\samples\sample4.jpg">
+      <Link>samples\sample4.jpg</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\samples\sample5.gif">
+      <Link>samples\sample5.gif</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\samples\sample6.jpg">
+      <Link>samples\sample6.jpg</Link>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

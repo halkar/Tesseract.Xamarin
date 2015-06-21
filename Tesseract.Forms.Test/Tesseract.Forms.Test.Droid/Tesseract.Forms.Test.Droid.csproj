@@ -147,16 +147,35 @@
   -->
   <ItemGroup>
     <Folder Include="Resources\raw\" />
+    <Folder Include="Assets\tessdata\" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\tessdata\eng.traineddata" />
-    <AndroidAsset Include="Assets\tessdata\eng.cube.bigrams" />
-    <AndroidAsset Include="Assets\tessdata\eng.cube.fold" />
-    <AndroidAsset Include="Assets\tessdata\eng.cube.lm" />
-    <AndroidAsset Include="Assets\tessdata\eng.cube.nn" />
-    <AndroidAsset Include="Assets\tessdata\eng.cube.params" />
-    <AndroidAsset Include="Assets\tessdata\eng.cube.size" />
-    <AndroidAsset Include="Assets\tessdata\eng.cube.word-freq" />
-    <AndroidAsset Include="Assets\tessdata\eng.tesseract_cube.nn" />
+    <AndroidAsset Include="..\tessdata\eng.cube.bigrams">
+      <Link>Assets\tessdata\eng.cube.bigrams</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\tessdata\eng.cube.fold">
+      <Link>Assets\tessdata\eng.cube.fold</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\tessdata\eng.cube.lm">
+      <Link>Assets\tessdata\eng.cube.lm</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\tessdata\eng.cube.nn">
+      <Link>Assets\tessdata\eng.cube.nn</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\tessdata\eng.cube.params">
+      <Link>Assets\tessdata\eng.cube.params</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\tessdata\eng.cube.size">
+      <Link>Assets\tessdata\eng.cube.size</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\tessdata\eng.cube.word-freq">
+      <Link>Assets\tessdata\eng.cube.word-freq</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\tessdata\eng.tesseract_cube.nn">
+      <Link>Assets\tessdata\eng.tesseract_cube.nn</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\tessdata\eng.traineddata">
+      <Link>Assets\tessdata\eng.traineddata</Link>
+    </AndroidAsset>
   </ItemGroup>
 </Project>

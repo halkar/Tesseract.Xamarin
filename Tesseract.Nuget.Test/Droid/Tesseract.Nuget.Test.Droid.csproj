@@ -115,6 +115,7 @@
   <ItemGroup>
     <Folder Include="Resources\layout\" />
     <Folder Include="Resources\values\" />
+    <Folder Include="Assets\tessdata\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon.png" />
@@ -125,20 +126,38 @@
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.1.4.2.6359\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.1.4.2.6359\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <ItemGroup>
-    <AndroidAsset Include="Assets\tessdata\eng.cube.bigrams" />
-    <AndroidAsset Include="Assets\tessdata\eng.cube.fold" />
-    <AndroidAsset Include="Assets\tessdata\eng.cube.lm" />
-    <AndroidAsset Include="Assets\tessdata\eng.cube.nn" />
-    <AndroidAsset Include="Assets\tessdata\eng.cube.params" />
-    <AndroidAsset Include="Assets\tessdata\eng.cube.size" />
-    <AndroidAsset Include="Assets\tessdata\eng.cube.word-freq" />
-    <AndroidAsset Include="Assets\tessdata\eng.tesseract_cube.nn" />
-    <AndroidAsset Include="Assets\tessdata\eng.traineddata" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Tesseract.Nuget.Test\Tesseract.Nuget.Test.csproj">
       <Project>{877E7EFD-190B-462F-8AD9-14D3984CEF0C}</Project>
       <Name>Tesseract.Nuget.Test</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.bigrams">
+      <Link>Assets\tessdata\eng.cube.bigrams</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.fold">
+      <Link>Assets\tessdata\eng.cube.fold</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.lm">
+      <Link>Assets\tessdata\eng.cube.lm</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.nn">
+      <Link>Assets\tessdata\eng.cube.nn</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.params">
+      <Link>Assets\tessdata\eng.cube.params</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.size">
+      <Link>Assets\tessdata\eng.cube.size</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.word-freq">
+      <Link>Assets\tessdata\eng.cube.word-freq</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\eng.tesseract_cube.nn">
+      <Link>Assets\tessdata\eng.tesseract_cube.nn</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\Tesseract.Forms.Test\tessdata\eng.traineddata">
+      <Link>Assets\tessdata\eng.traineddata</Link>
+    </AndroidAsset>
   </ItemGroup>
 </Project>

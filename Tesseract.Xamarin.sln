@@ -24,6 +24,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tesseract", "Tesseract\Tesseract.csproj", "{F39B9D88-09F7-4B04-9476-BF01A75E46DE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{7F6CD936-75D2-4BDC-B3F4-BD57B7B8EE55}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+		Xamarin.Tesseract.nuspec = Xamarin.Tesseract.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTest", "UnitTest", "{D3441B4E-A7B1-4A3A-AF53-D0D141E9BC2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tesseract.Droid.Test", "UnitTest\Tesseract.Droid.Test\Tesseract.Droid.Test.csproj", "{F233F474-E161-4D38-9078-2BCDAF0F1207}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -327,6 +335,54 @@ Global
 		{E80589FC-5034-40A6-A946-4FF45513CB95}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{E80589FC-5034-40A6-A946-4FF45513CB95}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{E80589FC-5034-40A6-A946-4FF45513CB95}.Release|x86.ActiveCfg = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Ad-Hoc|ARM.ActiveCfg = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Ad-Hoc|ARM.Build.0 = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Ad-Hoc|iPhoneSimulator.Build.0 = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Ad-Hoc|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Ad-Hoc|Mixed Platforms.Build.0 = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Ad-Hoc|x86.ActiveCfg = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Ad-Hoc|x86.Build.0 = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.AppStore|Any CPU.Build.0 = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.AppStore|ARM.ActiveCfg = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.AppStore|ARM.Build.0 = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.AppStore|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.AppStore|iPhoneSimulator.Build.0 = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.AppStore|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.AppStore|Mixed Platforms.Build.0 = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.AppStore|x86.ActiveCfg = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.AppStore|x86.Build.0 = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Debug|ARM.Build.0 = Debug|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Debug|x86.Build.0 = Debug|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Release|ARM.ActiveCfg = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Release|ARM.Build.0 = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Release|iPhone.Build.0 = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Release|x86.ActiveCfg = Release|Any CPU
+		{F233F474-E161-4D38-9078-2BCDAF0F1207}.Release|x86.Build.0 = Release|Any CPU
 		{F39B9D88-09F7-4B04-9476-BF01A75E46DE}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
 		{F39B9D88-09F7-4B04-9476-BF01A75E46DE}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
 		{F39B9D88-09F7-4B04-9476-BF01A75E46DE}.Ad-Hoc|ARM.ActiveCfg = Release|Any CPU
@@ -415,6 +471,18 @@ Global
 		{BC7F781E-65D6-42F9-8244-4804EF778B2C} = {05CA61A2-4D25-4221-8619-12D318E5A3D6}
 		{A9AFD0AE-ACFA-4441-B37E-0BD44ACCC431} = {05CA61A2-4D25-4221-8619-12D318E5A3D6}
 		{C1EDAE6A-2FE9-4844-B87E-032E00A15FD6} = {05CA61A2-4D25-4221-8619-12D318E5A3D6}
+		{F233F474-E161-4D38-9078-2BCDAF0F1207} = {D3441B4E-A7B1-4A3A-AF53-D0D141E9BC2A}
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.TextStylePolicy = $1
+		$1.inheritsSet = null
+		$1.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $2
+		$2.AfterDelegateDeclarationParameterComma = True
+		$2.inheritsSet = Mono
+		$2.inheritsScope = text/x-csharp
+		$2.scope = text/x-csharp
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

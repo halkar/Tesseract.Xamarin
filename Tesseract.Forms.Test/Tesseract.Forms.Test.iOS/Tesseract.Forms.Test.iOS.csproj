@@ -134,15 +134,33 @@
     <BundleResource Include="Resources\Icon-Small%402x.png" />
     <BundleResource Include="Resources\Icon-Small%403x.png" />
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
-    <BundleResource Include="Resources\tessdata\eng.cube.bigrams" />
-    <BundleResource Include="Resources\tessdata\eng.cube.fold" />
-    <BundleResource Include="Resources\tessdata\eng.cube.lm" />
-    <BundleResource Include="Resources\tessdata\eng.cube.nn" />
-    <BundleResource Include="Resources\tessdata\eng.cube.params" />
-    <BundleResource Include="Resources\tessdata\eng.cube.size" />
-    <BundleResource Include="Resources\tessdata\eng.cube.word-freq" />
-    <BundleResource Include="Resources\tessdata\eng.tesseract_cube.nn" />
-    <BundleResource Include="Resources\tessdata\eng.traineddata" />
+    <BundleResource Include="..\tessdata\eng.cube.bigrams">
+      <Link>Resources\tessdata\eng.cube.bigrams</Link>
+    </BundleResource>
+    <BundleResource Include="..\tessdata\eng.cube.fold">
+      <Link>Resources\tessdata\eng.cube.fold</Link>
+    </BundleResource>
+    <BundleResource Include="..\tessdata\eng.cube.lm">
+      <Link>Resources\tessdata\eng.cube.lm</Link>
+    </BundleResource>
+    <BundleResource Include="..\tessdata\eng.cube.nn">
+      <Link>Resources\tessdata\eng.cube.nn</Link>
+    </BundleResource>
+    <BundleResource Include="..\tessdata\eng.cube.params">
+      <Link>Resources\tessdata\eng.cube.params</Link>
+    </BundleResource>
+    <BundleResource Include="..\tessdata\eng.cube.size">
+      <Link>Resources\tessdata\eng.cube.size</Link>
+    </BundleResource>
+    <BundleResource Include="..\tessdata\eng.cube.word-freq">
+      <Link>Resources\tessdata\eng.cube.word-freq</Link>
+    </BundleResource>
+    <BundleResource Include="..\tessdata\eng.tesseract_cube.nn">
+      <Link>Resources\tessdata\eng.tesseract_cube.nn</Link>
+    </BundleResource>
+    <BundleResource Include="..\tessdata\eng.traineddata">
+      <Link>Resources\tessdata\eng.traineddata</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

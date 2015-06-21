@@ -138,15 +138,33 @@
     <BundleResource Include="Resources\Icon-Small-40.png" />
     <BundleResource Include="Resources\Icon-Small-40%402x.png" />
     <BundleResource Include="Resources\Icon-Small-40%403x.png" />
-    <BundleResource Include="Resources\tessdata\eng.cube.bigrams" />
-    <BundleResource Include="Resources\tessdata\eng.cube.fold" />
-    <BundleResource Include="Resources\tessdata\eng.cube.lm" />
-    <BundleResource Include="Resources\tessdata\eng.cube.nn" />
-    <BundleResource Include="Resources\tessdata\eng.cube.params" />
-    <BundleResource Include="Resources\tessdata\eng.cube.size" />
-    <BundleResource Include="Resources\tessdata\eng.cube.word-freq" />
-    <BundleResource Include="Resources\tessdata\eng.tesseract_cube.nn" />
-    <BundleResource Include="Resources\tessdata\eng.traineddata" />
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.bigrams">
+      <Link>Resources\tessdata\eng.cube.bigrams</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.fold">
+      <Link>Resources\tessdata\eng.cube.fold</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.lm">
+      <Link>Resources\tessdata\eng.cube.lm</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.nn">
+      <Link>Resources\tessdata\eng.cube.nn</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.params">
+      <Link>Resources\tessdata\eng.cube.params</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.size">
+      <Link>Resources\tessdata\eng.cube.size</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\eng.cube.word-freq">
+      <Link>Resources\tessdata\eng.cube.word-freq</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\eng.tesseract_cube.nn">
+      <Link>Resources\tessdata\eng.tesseract_cube.nn</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Tesseract.Forms.Test\tessdata\eng.traineddata">
+      <Link>Resources\tessdata\eng.traineddata</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -172,4 +190,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.1.4.2.6359\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.1.4.2.6359\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
+  <ItemGroup>
+    <Folder Include="Resources\tessdata\" />
+  </ItemGroup>
 </Project>
