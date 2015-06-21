@@ -113,13 +113,13 @@
       <HintPath>..\..\packages\Xamarin.TestCloud.Agent.0.14.1\lib\Xamarin.iOS10\Calabash.dll</HintPath>
     </Reference>
     <Reference Include="Tesseract.Binding.iOS">
-      <HintPath>..\..\packages\Xamarin.Tesseract.0.2.0\lib\Xamarin.iOS10\Tesseract.Binding.iOS.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Tesseract.0.2.1\lib\Xamarin.iOS10\Tesseract.Binding.iOS.dll</HintPath>
     </Reference>
     <Reference Include="Tesseract">
-      <HintPath>..\..\packages\Xamarin.Tesseract.0.2.0\lib\Xamarin.iOS10\Tesseract.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Tesseract.0.2.1\lib\Xamarin.iOS10\Tesseract.dll</HintPath>
     </Reference>
     <Reference Include="Tesseract.iOS">
-      <HintPath>..\..\packages\Xamarin.Tesseract.0.2.0\lib\Xamarin.iOS10\Tesseract.iOS.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Tesseract.0.2.1\lib\Xamarin.iOS10\Tesseract.iOS.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
