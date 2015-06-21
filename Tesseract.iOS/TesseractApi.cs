@@ -82,7 +82,10 @@ namespace Tesseract.iOS
 
         public void Dispose()
         {
-            _api.Dispose();
+			if (_api != null) {
+				_api.Dispose ();
+				_api = null;
+			}
         }
 
 		public void SetOcrEngineMode(Tesseract.OCREngineMode mode)

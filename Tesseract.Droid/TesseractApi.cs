@@ -15,7 +15,7 @@ namespace Tesseract.Droid
 {
     public class TesseractApi : ITesseractApi
     {
-        private readonly TessBaseAPI _api;
+        private TessBaseAPI _api;
 
 		private volatile bool _busy;
 
@@ -157,9 +157,17 @@ namespace Tesseract.Droid
 
         public int ProgressValue { get; private set; }
 
+		public void Clear()
+		{
+			_api.Clear ();
+		}
+
         public void Dispose()
         {
-            _api.Dispose();
+			if (_api != null) {
+				_api.Dispose ();
+				_api = null;
+			}
         }
 
 		public List<Result> Results(Tesseract.PageIteratorLevel level)

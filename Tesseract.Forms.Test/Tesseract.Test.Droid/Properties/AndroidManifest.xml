@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.tesseract.test.droid">
+	<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="19" />
+	<application android:label="Tesseract.Test.Droid" android:theme="@android:style/Theme.Holo.Light">
+	</application>
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-feature android:name="android.hardware.camera" />
+ 	<uses-feature android:name="android.hardware.camera.autofocus" />
+</manifest>
