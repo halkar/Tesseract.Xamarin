@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using ObjCRuntime;
 using System.Linq;
 using Tesseract.Binding.iOS;
+using MonoTouch.GpuImage;
 
 namespace Tesseract.iOS
 {
@@ -62,8 +63,13 @@ namespace Tesseract.iOS
                 return false;
             _busy = true;
             try {
-                _api.Image = image;
-                return await Task.Run (() => _api.Recognize ());
+                using (var filter = new GPUImageAdaptiveThresholdFilter ()) {
+                    filter.BlurSize = 4;
+                    using (var filteredImage = filter.ImageByFilteringImage (image)) {
+                        _api.Image = filteredImage;
+                        return await Task.Run (() => _api.Recognize ());
+                    }
+                }
             } finally {
                 _busy = false;
             }

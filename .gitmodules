@@ -1,0 +1,3 @@
+[submodule "gpuimage"]
+	path = gpuimage
+	url = https://github.com/halkar/monotouch-gpuimage

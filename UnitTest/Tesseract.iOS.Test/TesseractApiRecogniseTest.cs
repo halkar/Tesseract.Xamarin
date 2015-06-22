@@ -57,31 +57,31 @@ namespace Tesseract.iOS.Test
             using (var stream = LoadSample ("sample2.png")) {
                 var result = await _api.SetImage (stream);
                 Assert.IsTrue (result);
-                Assert.AreEqual ("ABCDE FGHI\nJKLHN OPQR\nSTUVVJXYZ\n\n", _api.Text);
+                Assert.AreEqual ("ABCDE FGHI\nJKLMN OPQR\nSTUVWXYZ\n\n", _api.Text);
             }
         }
 
-        //        [Test]
-        //        public async void Sample3Png ()
-        //        {
-        //            await _api.Init ("eng");
-        //            using (var stream = LoadSample ("sample3.png")) {
-        //                var result = await _api.SetImage (stream);
-        //                Assert.IsTrue (result);
-        //                Assert.AreEqual ("the quick brown fox\njumps over the lazy dog-\n\nTHE QUICK BROlLIN FOX\nJUMPS OVER THE LAZY DOG.\n\n", _api.Text);
-        //            }
-        //        }
-        //
-        //        [Test]
-        //        public async void Sample4Jpg ()
-        //        {
-        //            await _api.Init ("eng");
-        //            using (var stream = LoadSample ("sample4.jpg")) {
-        //                var result = await _api.SetImage (stream);
-        //                Assert.IsTrue (result);
-        //                Assert.AreEqual ("Good font for the OCR\nmﬁzufrfomﬁv rﬁe DC’R\nm m“ {mu mom\n\nGood font size for ocn\n\n", _api.Text);
-        //            }
-        //        }
+        [Test]
+        public async void Sample3Png ()
+        {
+            await _api.Init ("eng");
+            using (var stream = LoadSample ("sample3.png")) {
+                var result = await _api.SetImage (stream);
+                Assert.IsTrue (result);
+                Assert.AreEqual ("the quick brown fox\njumps over the lazy dog-\n\nTHE QUICK BROlllN FOX\nJUHPS OVER THE LAZY DOG.\n\n", _api.Text);
+            }
+        }
+
+        [Test]
+        public async void Sample4Jpg ()
+        {
+            await _api.Init ("eng");
+            using (var stream = LoadSample ("sample4.jpg")) {
+                var result = await _api.SetImage (stream);
+                Assert.IsTrue (result);
+                Assert.AreEqual ("Good font fol the 00?\nnﬁukfmfm tin ocaz\nno will m far can\n\nGood font size (07001\n\n", _api.Text);
+            }
+        }
 
         [Test]
         public async void Sample6BigFile ()
