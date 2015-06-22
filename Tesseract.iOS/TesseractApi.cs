@@ -64,7 +64,7 @@ namespace Tesseract.iOS
             _busy = true;
             try {
                 using (var filter = new GPUImageAdaptiveThresholdFilter ()) {
-                    filter.BlurSize = 4;
+                    filter.BlurRadiusInPixels = 4;
                     using (var filteredImage = filter.ImageByFilteringImage (image)) {
                         _api.Image = filteredImage;
                         return await Task.Run (() => _api.Recognize ());
