@@ -18,6 +18,16 @@ namespace Tesseract.Droid
         private TessBaseAPI _api;
         private volatile bool _busy;
 
+        /// <summary>
+        /// Whitelist of characters to recognize.
+        /// </summary>
+        public const string VAR_CHAR_WHITELIST = "tessedit_char_whitelist";
+
+        /// <summary>
+        /// Blacklist of characters to not recognize.
+        /// </summary>
+        public const string VAR_CHAR_BLACKLIST = "tessedit_char_blacklist";
+
         public string Text { get; private set; }
 
         public TesseractApi (Context context)
@@ -64,6 +74,16 @@ namespace Tesseract.Droid
             using (var bitmap = await BitmapFactory.DecodeStreamAsync (stream)) {
                 return await Recognise (bitmap);
             }
+        }
+
+        public void SetWhitelist (string whitelist)
+        {
+            _api.SetVariable (VAR_CHAR_WHITELIST, whitelist);
+        }
+
+        public void SetBlacklist (string blacklist)
+        {
+            _api.SetVariable (VAR_CHAR_BLACKLIST, blacklist);
         }
 
         public void SetPageSegmentationMode (PageSegmentationMode mode)

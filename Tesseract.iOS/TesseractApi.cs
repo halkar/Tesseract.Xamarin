@@ -104,6 +104,16 @@ namespace Tesseract.iOS
             get { return (int)_api.Progress; }
         }
 
+        public void SetWhitelist (string whitelist)
+        {
+            _api.CharWhitelist = whitelist;
+        }
+
+        public void SetBlacklist (string blacklist)
+        {
+            _api.CharBlacklist = blacklist;
+        }
+
         public void Dispose ()
         {
             if (_api != null) {
