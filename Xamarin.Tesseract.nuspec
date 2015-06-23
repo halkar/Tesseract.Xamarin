@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Xamarin.Tesseract</id>
-        <version>0.2.2</version>
+        <version>0.2.3</version>
         <title>Xamarin.Tesseract</title>
         <authors>Artur Shamsutdinov</authors>
         <projectUrl>https://github.com/halkar/Tesseract.Xamarin</projectUrl>
@@ -11,12 +11,12 @@
         <tags>xamarin xamarin.forms tesseract ocr</tags>
     </metadata>
     <files>
-        <file src="Tesseract.Droid\bin\Release\Tesseract.Binding.Droid.dll" target="lib\MonoAndroid10\Tesseract.Binding.Droid.dll" />
-        <file src="Tesseract.Droid\bin\Release\Tesseract.dll" target="lib\MonoAndroid10\Tesseract.dll" />
-        <file src="Tesseract.Droid\bin\Release\Tesseract.Droid.dll" target="lib\MonoAndroid10\Tesseract.Droid.dll" />
-        <file src="Tesseract\bin\Release\Tesseract.dll" target="lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Tesseract.dll" />
-        <file src="Tesseract.iOS\bin\iPhone\Release\Tesseract.Binding.iOS.dll" target="lib\Xamarin.iOS10\Tesseract.Binding.iOS.dll" />
-        <file src="Tesseract.iOS\bin\iPhone\Release\Tesseract.dll" target="lib\Xamarin.iOS10\Tesseract.dll" />
-        <file src="Tesseract.iOS\bin\iPhone\Release\Tesseract.iOS.dll" target="lib\Xamarin.iOS10\Tesseract.iOS.dll" />
+        <file src="Tesseract.Droid/bin/Release/Tesseract.Binding.Droid.dll" target="lib/MonoAndroid10/Tesseract.Binding.Droid.dll" />
+        <file src="Tesseract.Droid/bin/Release/Tesseract.dll" target="lib/MonoAndroid10/Tesseract.dll" />
+        <file src="Tesseract.Droid/bin/Release/Tesseract.Droid.dll" target="lib/MonoAndroid10/Tesseract.Droid.dll" />
+        <file src="Tesseract/bin/Release/Tesseract.dll" target="lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/Tesseract.dll" />
+        <file src="Tesseract.iOS/bin/iPhone/Release/Tesseract.Binding.iOS.dll" target="lib/Xamarin.iOS10/Tesseract.Binding.iOS.dll" />
+        <file src="Tesseract.iOS/bin/iPhone/Release/Tesseract.dll" target="lib/Xamarin.iOS10/Tesseract.dll" />
+        <file src="Tesseract.iOS/bin/iPhone/Release/Tesseract.iOS.dll" target="lib/Xamarin.iOS10/Tesseract.iOS.dll" />
     </files>
 </package>
