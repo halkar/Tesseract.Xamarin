@@ -155,7 +155,7 @@ namespace Tesseract.Droid
             return new BitmapFactory.Options { InSampleSize = 4 };
         }
 
-        private async Task<bool> Recognise (Bitmap bitmap)
+        public async Task<bool> Recognise (Bitmap bitmap)
         {
             if (_busy)
                 return false;

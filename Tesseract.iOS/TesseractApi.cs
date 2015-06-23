@@ -8,6 +8,7 @@ using ObjCRuntime;
 using System.Linq;
 using Tesseract.Binding.iOS;
 using CoreImage;
+using CoreGraphics;
 
 namespace Tesseract.iOS
 {
@@ -57,7 +58,7 @@ namespace Tesseract.iOS
             }
         }
 
-        private async Task<bool> Recognise (UIImage image)
+        public async Task<bool> Recognise (CIImage image)
         {
             if (_busy)
                 return false;
@@ -65,13 +66,11 @@ namespace Tesseract.iOS
             try {
                 return await Task.Run (() => {
                     using (var blur = new CIGaussianBlur ())
-                    using (var cgImage = image.CGImage)
-                    using (var ciImage = new CIImage (cgImage))
                     using (var context = CIContext.Create ()) {
                         blur.SetDefaults ();
-                        blur.Image = ciImage;
+                        blur.Image = image;
                         blur.Radius = 0;
-                        using (var outputCiImage = context.CreateCGImage (blur.OutputImage, ciImage.Extent))
+                        using (var outputCiImage = context.CreateCGImage (blur.OutputImage, image.Extent))
                         using (var newImage = new UIImage (outputCiImage)) {
                             _api.Image = newImage;
                             _api.Recognize ();
@@ -83,6 +82,18 @@ namespace Tesseract.iOS
             } finally {
                 _busy = false;
             }
+        }
+
+        public async Task<bool> Recognise (CGImage image)
+        {
+            using (var ciImage = new CIImage (image)) {
+                return await Recognise (ciImage);
+            }
+        }
+
+        public async Task<bool> Recognise (UIImage image)
+        {   
+            return await Recognise (image.CGImage);
         }
 
         public string Text {
