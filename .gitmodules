@@ -1,0 +1,3 @@
+[submodule "nuget"]
+	path = nuget
+	url = https://github.com/mono/nuget-binary.git
