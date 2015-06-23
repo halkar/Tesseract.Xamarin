@@ -56,9 +56,5 @@
       <Project>{F39B9D88-09F7-4B04-9476-BF01A75E46DE}</Project>
       <Name>Tesseract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\gpuimage\binding\MonoTouch.GpuImage.csproj">
-      <Project>{796AAA2D-772C-4355-9B10-A0B03FB0EA01}</Project>
-      <Name>MonoTouch.GpuImage</Name>
-    </ProjectReference>
   </ItemGroup>
 </Project>

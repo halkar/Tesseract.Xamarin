@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using ObjCRuntime;
 using System.Linq;
 using Tesseract.Binding.iOS;
-using MonoTouch.GpuImage;
+using CoreImage;
 
 namespace Tesseract.iOS
 {
@@ -38,22 +38,22 @@ namespace Tesseract.iOS
 
         public async Task<bool> SetImage (byte[] data)
         {
-            using (var uIImage = new UIImage (NSData.FromArray (data))) {
-                return await Recognise (uIImage);
+            using (var uiImage = new UIImage (NSData.FromArray (data))) {
+                return await Recognise (uiImage);
             }
         }
 
         public async Task<bool> SetImage (Stream stream)
         {
-            using (var uIImage = new UIImage (NSData.FromStream (stream))) {
-                return await Recognise (uIImage);
+            using (var uiImage = new UIImage (NSData.FromStream (stream))) {
+                return await Recognise (uiImage);
             }
         }
 
         public async Task<bool> SetImage (string path)
         {
-            using (var uIImage = new UIImage (path)) {
-                return await Recognise (uIImage);
+            using (var uiImage = new UIImage (path)) {
+                return await Recognise (uiImage);
             }
         }
 
@@ -63,13 +63,23 @@ namespace Tesseract.iOS
                 return false;
             _busy = true;
             try {
-                using (var filter = new GPUImageAdaptiveThresholdFilter ()) {
-                    filter.BlurRadiusInPixels = 4;
-                    using (var filteredImage = filter.ImageByFilteringImage (image)) {
-                        _api.Image = filteredImage;
-                        return await Task.Run (() => _api.Recognize ());
+                return await Task.Run (() => {
+                    using (var blur = new CIGaussianBlur ())
+                    using (var cgImage = image.CGImage)
+                    using (var ciImage = new CIImage (cgImage))
+                    using (var context = CIContext.Create ()) {
+                        blur.SetDefaults ();
+                        blur.Image = ciImage;
+                        blur.Radius = 0;
+                        using (var outputCiImage = context.CreateCGImage (blur.OutputImage, ciImage.Extent))
+                        using (var newImage = new UIImage (outputCiImage)) {
+                            _api.Image = newImage;
+                            _api.Recognize ();
+                            return true;
+                        }
                     }
-                }
+
+                });
             } finally {
                 _busy = false;
             }
