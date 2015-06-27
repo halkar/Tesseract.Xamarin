@@ -57,6 +57,8 @@ namespace Tesseract.Droid
 
         public async Task<bool> SetImage (byte[] data)
         {
+            if (data == null)
+                throw new ArgumentNullException ("data");
             using (var bitmap = await BitmapFactory.DecodeByteArrayAsync (data, 0, data.Length, GetOptions ())) {
                 return await Recognise (bitmap);
             }
@@ -64,6 +66,8 @@ namespace Tesseract.Droid
 
         public async Task<bool> SetImage (string path)
         {
+            if (path == null)
+                throw new ArgumentNullException ("path");
             using (var bitmap = await BitmapFactory.DecodeFileAsync (path, GetOptions ())) {
                 return await Recognise (bitmap);
             }
@@ -71,6 +75,8 @@ namespace Tesseract.Droid
 
         public async Task<bool> SetImage (Stream stream)
         {
+            if (stream == null)
+                throw new ArgumentNullException ("stream");
             using (var bitmap = await BitmapFactory.DecodeStreamAsync (stream)) {
                 return await Recognise (bitmap);
             }
@@ -140,8 +146,7 @@ namespace Tesseract.Droid
         }
 
         public List<Result> Results (Tesseract.PageIteratorLevel level)
-        {
-			
+        {	
             var pageIteratorLevel = GetPageIteratorLevel (level);
             int[] boundingBox;
             var results = new List<Result> ();
@@ -177,16 +182,42 @@ namespace Tesseract.Droid
 
         public async Task<bool> Recognise (Bitmap bitmap)
         {
+            if (bitmap == null)
+                throw new ArgumentNullException ("bitmap");
             if (_busy)
                 return false;
             _busy = true;
             try {
-                await Task.Run (() => _api.SetImage (bitmap));
-                await Task.Run (() => Text = _api.UTF8Text);
+                await Task.Run (() => {
+                    var grayscaleImage = changeBitmapContrastBrightness (bitmap, 10, -100);
+                    _api.SetImage (grayscaleImage);
+                    Text = _api.UTF8Text;
+                });
                 return true;
             } finally {
                 _busy = false;
             }
+        }
+
+        public static Bitmap changeBitmapContrastBrightness (Bitmap bmp, float contrast, float brightness)
+        {
+            ColorMatrix cm = new ColorMatrix (new float[] {
+                contrast, 0, 0, 0, brightness,
+                0, contrast, 0, 0, brightness,
+                0, 0, contrast, 0, brightness,
+                0, 0, 0, 1, 0
+            });
+            cm.SetSaturation (0);
+
+            Bitmap ret = Bitmap.CreateBitmap (bmp.Width, bmp.Height, bmp.GetConfig ());
+
+            Canvas canvas = new Canvas (ret);
+
+            Paint paint = new Paint ();
+            paint.SetColorFilter (new ColorMatrixColorFilter (cm));
+            canvas.DrawBitmap (bmp, 0, 0, paint);
+
+            return ret;
         }
 
         private int GetOcrEngineMode (OcrEngineMode mode)

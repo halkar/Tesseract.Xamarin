@@ -39,6 +39,8 @@ namespace Tesseract.iOS
 
         public async Task<bool> SetImage (byte[] data)
         {
+            if (data == null)
+                throw new ArgumentNullException ("data");
             using (var uiImage = new UIImage (NSData.FromArray (data))) {
                 return await Recognise (uiImage);
             }
@@ -46,6 +48,8 @@ namespace Tesseract.iOS
 
         public async Task<bool> SetImage (Stream stream)
         {
+            if (stream == null)
+                throw new ArgumentNullException ("stream");
             using (var uiImage = new UIImage (NSData.FromStream (stream))) {
                 return await Recognise (uiImage);
             }
@@ -53,6 +57,8 @@ namespace Tesseract.iOS
 
         public async Task<bool> SetImage (string path)
         {
+            if (path == null)
+                throw new ArgumentNullException ("path");
             using (var uiImage = new UIImage (path)) {
                 return await Recognise (uiImage);
             }
@@ -60,6 +66,8 @@ namespace Tesseract.iOS
 
         public async Task<bool> Recognise (CIImage image)
         {
+            if (image == null)
+                throw new ArgumentNullException ("image");
             if (_busy)
                 return false;
             _busy = true;

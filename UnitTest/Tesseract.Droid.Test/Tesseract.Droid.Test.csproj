@@ -50,6 +50,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TesseractApiInitTest.cs" />
     <Compile Include="TesseractApiRecogniseTest.cs" />
+    <Compile Include="TesseractApiLoadTest.cs" />
+    <Compile Include="TesseractApiErrorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

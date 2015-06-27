@@ -80,6 +80,8 @@
     <Compile Include="UnitTestAppDelegate.cs" />
     <Compile Include="TesseractApiRecogniseTest.cs" />
     <Compile Include="TesseractApiInitTest.cs" />
+    <Compile Include="TesseractApiErrorTest.cs" />
+    <Compile Include="TesseractApiLoadTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

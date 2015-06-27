@@ -84,6 +84,7 @@ namespace Tesseract.Droid.Test
         }
 
         [Test]
+        [Ignore]
         public async void Sample6BigFile ()
         {
             await _api.Init ("eng");
@@ -93,7 +94,7 @@ namespace Tesseract.Droid.Test
             }
         }
 
-        private Stream LoadSample (string name)
+        public static Stream LoadSample (string name)
         {
             var assembly = Assembly.GetAssembly (typeof(TesseractApiRecogniseTest));
             return assembly.GetManifestResourceStream ("Tesseract.Droid.Test.samples." + name);
