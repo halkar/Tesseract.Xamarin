@@ -92,6 +92,11 @@ namespace Tesseract.Droid
             _api.SetVariable (VAR_CHAR_BLACKLIST, blacklist);
         }
 
+        public void SetRectangle (Tesseract.Rectangle rect)
+        {
+            _api.SetRectangle ((int)rect.Left, (int)rect.Top, (int)rect.Width, (int)rect.Height);
+        }
+
         public void SetPageSegmentationMode (PageSegmentationMode mode)
         {
             switch (mode) {

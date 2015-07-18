@@ -18,5 +18,5 @@ In Android application `tessdata` folder should be in your assets directory and 
 ##License
 Tesseract.Xamarin is distributed under the MIT license (see LICENSE).
 Tesseract, maintained by Google (http://code.google.com/p/tesseract-ocr/), is distributed under the Apache 2.0 license (see http://www.apache.org/licenses/LICENSE-2.0).
-Tesseract OCR iOS (https://github.com/gali8/Tesseract-OCR-iOS) is distributed under MIT license (https://github.com/gali8/Tesseract-OCR-iOS/blob/master/LICENSE.md).
-tess-two (https://github.com/rmtheis/tess-two) is distributed under Apache 2.0 license (https://github.com/rmtheis/tess-two/blob/master/COPYING).
+Tesseract OCR iOS is distributed under MIT license (https://github.com/gali8/Tesseract-OCR-iOS/blob/master/LICENSE.md).
+tess-two is distributed under Apache 2.0 license (https://github.com/rmtheis/tess-two/blob/master/COPYING).

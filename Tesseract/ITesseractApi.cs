@@ -60,6 +60,21 @@ namespace Tesseract
         /// Sets the blacklist.
         /// </summary>
         void SetBlacklist (string blacklist);
+
+        /// <summary>
+        /// Frees up recognition results and any stored image data, without actually
+        /// freeing any recognition data that would be time-consuming to reload.
+        /// Afterwards, you must call SetImage before getting any
+        /// Text or Results.
+        /// </summary>
+        void Clear ();
+
+        /// <summary>
+        /// Restricts recognition to a sub-rectangle of the image. Call after
+        /// SetImage. Each SetRectangle clears the recognition results so multiple
+        /// rectangles can be recognized with the same image.
+        /// </summary>
+        void SetRectangle (Tesseract.Rectangle rect);
     }
 }
 

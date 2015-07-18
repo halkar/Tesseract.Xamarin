@@ -122,12 +122,22 @@ namespace Tesseract.iOS
             _api.CharBlacklist = blacklist;
         }
 
+        public void SetRectangle (Tesseract.Rectangle rect)
+        {
+            _api.Rect = new CGRect (rect.Left, rect.Top, rect.Width, rect.Height);
+        }
+
         public void Dispose ()
         {
             if (_api != null) {
                 _api.Dispose ();
                 _api = null;
             }
+        }
+
+        public void Clear ()
+        {
+            Tesseract.Binding.iOS.G8Tesseract.ClearCache ();
         }
 
         public void SetOcrEngineMode (Tesseract.OcrEngineMode mode)
