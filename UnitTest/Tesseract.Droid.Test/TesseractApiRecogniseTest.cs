@@ -191,7 +191,7 @@ namespace Tesseract.Droid.Test
                         using (var stream = LoadSample ("sample3.png")) {
                             var result = await _api.SetImage (stream);
                             Assert.IsTrue (result);
-                            Console.WriteLine ("<strong>{0}:</strong>\n{1}", segmentationMode, _api.Text.Replace ("\n", " "));
+                            Console.WriteLine ("Segmentation mode: {0}, result: \"{1}\"", segmentationMode, _api.Text.Replace ("\n", " "));
                         }
                     }
                 }

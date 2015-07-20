@@ -8,6 +8,7 @@ using Android.Util;
 using Com.Googlecode.Tesseract.Android;
 using File = Java.IO.File;
 using Object = Java.Lang.Object;
+using Java.IO;
 
 namespace Tesseract.Droid
 {
@@ -270,13 +271,28 @@ namespace Tesseract.Droid
         private async Task<string> CopyAssets ()
         {
             try {
-                var assetManager = _context.Assets;
-                var files = assetManager.List ("tessdata");
-                var file = _context.GetExternalFilesDir (null);
+                Android.Content.Res.AssetManager assetManager = _context.Assets;
+                string[] files = assetManager.List ("tessdata");
+                File file = _context.GetExternalFilesDir (null);
                 var tessdata = new File (_context.GetExternalFilesDir (null), "tessdata");
                 if (!tessdata.Exists ()) {
                     tessdata.Mkdir ();
+                } else {
+                    var packageInfo = _context.PackageManager.GetPackageInfo (_context.PackageName, 0);
+                    var version = packageInfo.VersionName;
+                    var versionFile = new File (tessdata, "version");
+                    if (versionFile.Exists ()) {
+                        var fileVersion = System.IO.File.ReadAllText (versionFile.AbsolutePath);
+                        if (version == fileVersion) {
+                            Log.Debug ("[TesseractApi]", "Application version didn't change, skipping copying assets");
+                            return file.AbsolutePath;
+                        }
+                        versionFile.Delete ();
+                    }
+                    System.IO.File.WriteAllText (versionFile.AbsolutePath, version);
                 }
+
+                Log.Debug ("[TesseractApi]", "Copy assets to " + file.AbsolutePath);
 
                 foreach (var filename in files) {
                     using (var inStream = assetManager.Open ("tessdata/" + filename)) {
