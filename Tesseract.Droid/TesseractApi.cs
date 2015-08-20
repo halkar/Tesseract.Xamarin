@@ -63,6 +63,12 @@ namespace Tesseract.Droid
             return result;
         }
 
+        public void SetVariable (string key, string value)
+        {
+            CheckIfInitialized ();
+            _api.SetVariable (key, value);
+        }
+
         public async Task<bool> SetImage (byte[] data)
         {
             CheckIfInitialized ();

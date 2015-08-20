@@ -106,6 +106,18 @@ namespace Tesseract.iOS.Test
             }
         }
 
+        [Test]
+        public async void Sample4JpgWithSetVariable ()
+        {
+            await _api.Init ("eng");
+            _api.SetVariable ("tessedit_char_whitelist", "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
+            using (var stream = LoadSample ("sample4.jpg")) {
+                var result = await _api.SetImage (stream);
+                Assert.IsTrue (result);
+                Assert.AreEqual ("Good font for the OCR\nDingufrfom n Me am\nhe mm mm m cm\n\nGood 60m size for ocn\n\n", _api.Text);
+            }
+        }
+
         public static Stream LoadSample (string name)
         {
             var assembly = Assembly.GetAssembly (typeof(TesseractApiRecogniseTest));

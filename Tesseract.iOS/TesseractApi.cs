@@ -37,6 +37,12 @@ namespace Tesseract.iOS
             return Initialized;
         }
 
+        public void SetVariable (string key, string value)
+        {
+            CheckIfInitialized ();
+            _api.SetVariableValue (value, key);
+        }
+
         public async Task<bool> SetImage (byte[] data)
         {
             CheckIfInitialized ();

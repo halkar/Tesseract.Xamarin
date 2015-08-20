@@ -198,6 +198,30 @@ namespace Tesseract.Droid.Test
             }
         }
 
+        [Test]
+        public async void Sample4JpgWithWhitelist ()
+        {
+            await _api.Init ("eng");
+            _api.SetWhitelist ("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
+            using (var stream = LoadSample ("sample4.jpg")) {
+                var result = await _api.SetImage (stream);
+                Assert.IsTrue (result);
+                Assert.AreEqual ("Good font for the OCR\nDingufrfom n Me am\nhe mu mu mom\n\nGood font size for ocn", _api.Text);
+            }
+        }
+
+        [Test]
+        public async void Sample4JpgWithSetVariable ()
+        {
+            await _api.Init ("eng");
+            _api.SetVariable ("tessedit_char_whitelist", "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
+            using (var stream = LoadSample ("sample4.jpg")) {
+                var result = await _api.SetImage (stream);
+                Assert.IsTrue (result);
+                Assert.AreEqual ("Good font for the OCR\nDingufrfom n Me am\nhe mu mu mom\n\nGood font size for ocn", _api.Text);
+            }
+        }
+
         public static Stream LoadSample (string name)
         {
             var assembly = Assembly.GetAssembly (typeof(TesseractApiRecogniseTest));

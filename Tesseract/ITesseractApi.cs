@@ -75,6 +75,13 @@ namespace Tesseract
         /// rectangles can be recognized with the same image.
         /// </summary>
         void SetRectangle (Tesseract.Rectangle rect);
+
+        /// <summary>
+        /// Set the value of an internal "parameter."
+        /// </summary>
+        /// <param name="key">Key.</param>
+        /// <param name="value">Value.</param>
+        void SetVariable (string key, string value);
     }
 }
 
