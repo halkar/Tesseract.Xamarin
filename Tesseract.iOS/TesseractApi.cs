@@ -39,6 +39,7 @@ namespace Tesseract.iOS
 
         public async Task<bool> SetImage (byte[] data)
         {
+            CheckIfInitialized ();
             if (data == null)
                 throw new ArgumentNullException ("data");
             using (var uiImage = new UIImage (NSData.FromArray (data))) {
@@ -48,6 +49,7 @@ namespace Tesseract.iOS
 
         public async Task<bool> SetImage (Stream stream)
         {
+            CheckIfInitialized ();
             if (stream == null)
                 throw new ArgumentNullException ("stream");
             using (var uiImage = new UIImage (NSData.FromStream (stream))) {
@@ -57,6 +59,7 @@ namespace Tesseract.iOS
 
         public async Task<bool> SetImage (string path)
         {
+            CheckIfInitialized ();
             if (path == null)
                 throw new ArgumentNullException ("path");
             using (var uiImage = new UIImage (path)) {
@@ -66,6 +69,7 @@ namespace Tesseract.iOS
 
         public async Task<bool> Recognise (CIImage image)
         {
+            CheckIfInitialized ();
             if (image == null)
                 throw new ArgumentNullException ("image");
             if (_busy)
@@ -94,6 +98,7 @@ namespace Tesseract.iOS
 
         public async Task<bool> Recognise (CGImage image)
         {
+            CheckIfInitialized ();
             using (var ciImage = new CIImage (image)) {
                 return await Recognise (ciImage);
             }
@@ -101,29 +106,39 @@ namespace Tesseract.iOS
 
         public async Task<bool> Recognise (UIImage image)
         {   
+            CheckIfInitialized ();
             return await Recognise (image.CGImage);
         }
 
         public string Text {
-            get { return _api.RecognizedText; }
+            get {
+                CheckIfInitialized ();
+                return _api.RecognizedText;
+            }
         }
 
         public int ProgressValue {
-            get { return (int)_api.Progress; }
+            get {
+                CheckIfInitialized ();
+                return (int)_api.Progress;
+            }
         }
 
         public void SetWhitelist (string whitelist)
         {
+            CheckIfInitialized ();
             _api.CharWhitelist = whitelist;
         }
 
         public void SetBlacklist (string blacklist)
         {
+            CheckIfInitialized ();
             _api.CharBlacklist = blacklist;
         }
 
         public void SetRectangle (Tesseract.Rectangle rect)
         {
+            CheckIfInitialized ();
             _api.Rect = new CGRect (rect.Left, rect.Top, rect.Width, rect.Height);
         }
 
@@ -238,6 +253,12 @@ namespace Tesseract.iOS
                     (float)r.BoundingBox.Height
                 )
             };
+        }
+
+        private void CheckIfInitialized ()
+        {
+            if (!Initialized)
+                throw new InvalidOperationException ("Call Init first");
         }
     }
 }

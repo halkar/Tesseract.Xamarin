@@ -56,6 +56,13 @@ namespace Tesseract.Droid.Test
             await _api.Init ("eng");
             await _api.Recognise ((Bitmap)null);
         }
+
+        [Test]
+        [ExpectedException (typeof(InvalidOperationException))]
+        public async void NotInitializedTest ()
+        {
+            await _api.Recognise ((Bitmap)null);
+        }
     }
 }
 

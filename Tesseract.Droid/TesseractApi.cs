@@ -56,8 +56,16 @@ namespace Tesseract.Droid
             return result;
         }
 
+        public async Task<bool> Init (string tessDataPath, string language)
+        {
+            var result = _api.Init (tessDataPath, language);
+            Initialized = result;
+            return result;
+        }
+
         public async Task<bool> SetImage (byte[] data)
         {
+            CheckIfInitialized ();
             if (data == null)
                 throw new ArgumentNullException ("data");
             using (var bitmap = await BitmapFactory.DecodeByteArrayAsync (data, 0, data.Length, GetOptions ())) {
@@ -67,6 +75,7 @@ namespace Tesseract.Droid
 
         public async Task<bool> SetImage (string path)
         {
+            CheckIfInitialized ();
             if (path == null)
                 throw new ArgumentNullException ("path");
             using (var bitmap = await BitmapFactory.DecodeFileAsync (path, GetOptions ())) {
@@ -76,6 +85,7 @@ namespace Tesseract.Droid
 
         public async Task<bool> SetImage (Stream stream)
         {
+            CheckIfInitialized ();
             if (stream == null)
                 throw new ArgumentNullException ("stream");
             using (var bitmap = await BitmapFactory.DecodeStreamAsync (stream)) {
@@ -85,21 +95,25 @@ namespace Tesseract.Droid
 
         public void SetWhitelist (string whitelist)
         {
+            CheckIfInitialized ();
             _api.SetVariable (VAR_CHAR_WHITELIST, whitelist);
         }
 
         public void SetBlacklist (string blacklist)
         {
+            CheckIfInitialized ();
             _api.SetVariable (VAR_CHAR_BLACKLIST, blacklist);
         }
 
         public void SetRectangle (Tesseract.Rectangle rect)
         {
+            CheckIfInitialized ();
             _api.SetRectangle ((int)rect.Left, (int)rect.Top, (int)rect.Width, (int)rect.Height);
         }
 
         public void SetPageSegmentationMode (PageSegmentationMode mode)
         {
+            CheckIfInitialized ();
             switch (mode) {
             case PageSegmentationMode.Auto:
                 _api.SetPageSegMode (PageSegMode.Auto);
@@ -153,6 +167,7 @@ namespace Tesseract.Droid
 
         public List<Result> Results (Tesseract.PageIteratorLevel level)
         {	
+            CheckIfInitialized ();
             var pageIteratorLevel = GetPageIteratorLevel (level);
             int[] boundingBox;
             var results = new List<Result> ();
@@ -174,13 +189,6 @@ namespace Tesseract.Droid
 
         public event EventHandler<ProgressEventArgs> Progress;
 
-        public async Task<bool> Init (string tessDataPath, string language)
-        {
-            var result = _api.Init (tessDataPath, language);
-            Initialized = result;
-            return result;
-        }
-
         private static BitmapFactory.Options GetOptions ()
         {
             return new BitmapFactory.Options { InSampleSize = 4 };
@@ -188,6 +196,7 @@ namespace Tesseract.Droid
 
         public async Task<bool> Recognise (Bitmap bitmap)
         {
+            CheckIfInitialized ();
             if (bitmap == null)
                 throw new ArgumentNullException ("bitmap");
             if (_busy)
@@ -195,7 +204,7 @@ namespace Tesseract.Droid
             _busy = true;
             try {
                 await Task.Run (() => {
-                    var grayscaleImage = changeBitmapContrastBrightness (bitmap, 10, -100);
+                    var grayscaleImage = ChangeBitmapContrastBrightness (bitmap, 10, -100);
                     _api.SetImage (grayscaleImage);
                     Text = _api.UTF8Text;
                 });
@@ -205,7 +214,7 @@ namespace Tesseract.Droid
             }
         }
 
-        public static Bitmap changeBitmapContrastBrightness (Bitmap bmp, float contrast, float brightness)
+        public static Bitmap ChangeBitmapContrastBrightness (Bitmap bmp, float contrast, float brightness)
         {
             ColorMatrix cm = new ColorMatrix (new float[] {
                 contrast, 0, 0, 0, brightness,
@@ -319,6 +328,12 @@ namespace Tesseract.Droid
             var handler = Progress;
             if (handler != null)
                 handler (this, new ProgressEventArgs (progress));
+        }
+
+        private void CheckIfInitialized ()
+        {
+            if (!Initialized)
+                throw new InvalidOperationException ("Call Init first");
         }
 
         private class ProgressHandler : Object, TessBaseAPI.IProgressNotifier
