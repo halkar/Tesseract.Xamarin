@@ -48,12 +48,18 @@ namespace Tesseract.Droid
         {
             if (string.IsNullOrEmpty (language))
                 return false;
-            var path = await CopyAssets ();
-            var result = mode.HasValue
+            try {
+                var path = await CopyAssets ();
+                var result = mode.HasValue
                 ? _api.Init (path, language, GetOcrEngineMode (mode.Value))
                 : _api.Init (path, language);
-            Initialized = result;
-            return result;
+                Initialized = result;
+                return result;
+            } catch (Java.Lang.IllegalArgumentException ex) {
+                Log.Debug ("[TesseractApi]", ex, ex.Message);
+                Initialized = false;
+                return false;
+            }
         }
 
         public async Task<bool> Init (string tessDataPath, string language)

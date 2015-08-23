@@ -48,6 +48,8 @@
     <EmbeddedNativeLibrary Include="Jars\armeabi-v7a\libtess.so" />
     <EmbeddedNativeLibrary Include="Jars\x86\liblept.so" />
     <EmbeddedNativeLibrary Include="Jars\x86\libtess.so" />
+    <EmbeddedNativeLibrary Include="Jars\armeabi-v7a\libpng.so" />
+    <EmbeddedNativeLibrary Include="Jars\x86\libpng.so" />
   </ItemGroup>
   <ItemGroup>
     <TransformFile Include="Transforms\Metadata.xml">

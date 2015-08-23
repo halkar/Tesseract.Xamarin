@@ -1,3 +1,4 @@
 <metadata>
+  <remove-node path="/api/package[@name='com.googlecode.tesseract.android']/class[@name='TessBaseAPI']/method[@name='ReadConfigFile']" />
   <attr path="/api/package[@name='com.googlecode.leptonica.android']/class[@name='Pixa.PixIterator']/method[@name='next']" name="managedReturn">Java.Lang.Object</attr>
 </metadata>
