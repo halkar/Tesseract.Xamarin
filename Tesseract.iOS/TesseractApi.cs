@@ -18,6 +18,8 @@ namespace Tesseract.iOS
 
         private volatile bool _busy;
 
+        private CGSize _size;
+
         public event EventHandler<ProgressEventArgs> Progress;
 
         public bool Initialized { get; private set; }
@@ -90,6 +92,7 @@ namespace Tesseract.iOS
                         blur.Radius = 0;
                         using (var outputCiImage = context.CreateCGImage (blur.OutputImage, image.Extent))
                         using (var newImage = new UIImage (outputCiImage)) {
+                            _size = newImage.Size;
                             _api.Image = newImage;
                             _api.Recognize ();
                             return true;
@@ -253,10 +256,10 @@ namespace Tesseract.iOS
                 Confidence = (float)r.Confidence,
                 Text = r.Text,
                 Box = new Rectangle (
-                    (float)r.BoundingBox.X,
-                    (float)r.BoundingBox.Y,
-                    (float)r.BoundingBox.Width,
-                    (float)r.BoundingBox.Height
+                    (float)(_size.Width * r.BoundingBox.X),
+                    (float)(_size.Height * r.BoundingBox.Y),
+                    (float)(_size.Width * r.BoundingBox.Width),
+                    (float)(_size.Height * r.BoundingBox.Height)
                 )
             };
         }
