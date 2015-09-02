@@ -216,35 +216,13 @@ namespace Tesseract.Droid
             _busy = true;
             try {
                 await Task.Run (() => {
-                    var grayscaleImage = ChangeBitmapContrastBrightness (bitmap, 10, -100);
-                    _api.SetImage (grayscaleImage);
+                    _api.SetImage (bitmap);
                     Text = _api.UTF8Text;
                 });
                 return true;
             } finally {
                 _busy = false;
             }
-        }
-
-        public static Bitmap ChangeBitmapContrastBrightness (Bitmap bmp, float contrast, float brightness)
-        {
-            ColorMatrix cm = new ColorMatrix (new float[] {
-                contrast, 0, 0, 0, brightness,
-                0, contrast, 0, 0, brightness,
-                0, 0, contrast, 0, brightness,
-                0, 0, 0, 1, 0
-            });
-            cm.SetSaturation (0);
-
-            Bitmap ret = Bitmap.CreateBitmap (bmp.Width, bmp.Height, bmp.GetConfig ());
-
-            Canvas canvas = new Canvas (ret);
-
-            Paint paint = new Paint ();
-            paint.SetColorFilter (new ColorMatrixColorFilter (cm));
-            canvas.DrawBitmap (bmp, 0, 0, paint);
-
-            return ret;
         }
 
         private int GetOcrEngineMode (OcrEngineMode mode)
