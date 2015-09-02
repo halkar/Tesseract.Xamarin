@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Xamarin.Tesseract</id>
-        <version>0.2.6</version>
+        <version>0.2.7</version>
         <title>Xamarin.Tesseract</title>
         <authors>Artur Shamsutdinov</authors>
         <projectUrl>https://github.com/halkar/Tesseract.Xamarin</projectUrl>
