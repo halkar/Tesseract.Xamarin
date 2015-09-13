@@ -1,0 +1,24 @@
+{
+  "name": "tesseract-xamarin",
+  "version": "0.2.8",
+  "description": "Xamarin.Tesseract is a wrapper for [Tesseract OCR](https://code.google.com/p/tesseract-ocr/) library. For Android [tess-two](https://github.com/rmtheis/tess-two) is used and for iOS implementation from [gali8](https://github.com/gali8/Tesseract-OCR-iOS) (v.4.0.0) is used. ##Documantation [Blog post](http://shamsutdinov.net/2015/07/01/tesseract-orc-xamarin-part-1/) ##Utilisation Best way to use Xamarin.Tesseract is to add [Nuget package](https://www.nuget.org/packages/Xamarin.Tesseract/) to your project.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/halkar/Tesseract.Xamarin.git"
+  },
+  "keywords": [
+    "tesseract",
+    "xamarin"
+  ],
+  "author": "Artur Shamsutdinov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/halkar/Tesseract.Xamarin/issues"
+  },
+  "homepage": "https://github.com/halkar/Tesseract.Xamarin#readme",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-msbuild": "^0.3.4",
+    "grunt-nuget": "^0.1.4"
+  }
+}
