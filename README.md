@@ -7,7 +7,7 @@ For Android [tess-two](https://github.com/rmtheis/tess-two) is used and for iOS 
 Best way to use Xamarin.Tesseract is to add [Nuget package](https://www.nuget.org/packages/Xamarin.Tesseract/) to your project.
 
     //Android
-    TesseractApi api = new TesseractApi (context);
+    TesseractApi api = new TesseractApi (context, AssetsDeployment.OncePerVersion);
     //iOS
     TesseractApi api = new TesseractApi ();
     await api.Init ("eng");
