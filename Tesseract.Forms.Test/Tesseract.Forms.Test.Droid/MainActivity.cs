@@ -14,24 +14,27 @@ using Android.Util;
 
 namespace Tesseract.Forms.Test.Droid
 {
-    [Activity(Label = "Tesseract.Forms.Test", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity (Label = "Tesseract.Forms.Test", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : FormsApplicationActivity
     {
-        protected override void OnCreate(Bundle bundle)
+        protected override void OnCreate (Bundle bundle)
         {
-            base.OnCreate(bundle);
+            base.OnCreate (bundle);
 
-            Xamarin.Forms.Forms.Init(this, bundle);
+            Xamarin.Forms.Forms.Init (this, bundle);
 
-			var containerBuilder = new Autofac.ContainerBuilder();
+            var containerBuilder = new Autofac.ContainerBuilder ();
 
-			containerBuilder.Register(c => this).As<Context>();
-			containerBuilder.RegisterType<MediaPicker> ().As<IMediaPicker> ();
-			containerBuilder.RegisterType<TesseractApi> ().As<ITesseractApi> ();
+            containerBuilder.Register (c => this).As<Context> ();
+            containerBuilder.RegisterType<MediaPicker> ().As<IMediaPicker> ();
+            containerBuilder.RegisterType<TesseractApi> ()
+                .As<ITesseractApi> ()
+                .WithParameter ((pi, c) => pi.ParameterType == typeof(AssetsDeployment),
+                (pi, c) => AssetsDeployment.OncePerInitialization);
 
-			Resolver.SetResolver(new AutofacResolver(containerBuilder.Build()));
+            Resolver.SetResolver (new AutofacResolver (containerBuilder.Build ()));
 
-            LoadApplication(new App());
+            LoadApplication (new App ());
         }
     }
 }

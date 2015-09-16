@@ -122,20 +122,6 @@
   <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Tesseract.Droid\Tesseract.Droid.csproj">
-      <Project>{75FE46B1-71EB-4525-89F9-278799B5C823}</Project>
-      <Name>Tesseract.Droid</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Tesseract\Tesseract.csproj">
-      <Project>{F39B9D88-09F7-4B04-9476-BF01A75E46DE}</Project>
-      <Name>Tesseract</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Tesseract.Forms.Test\Tesseract.Forms.Test.csproj">
-      <Name>Tesseract.Forms.Test</Name>
-      <Project>{ADCD6BCA-2092-4E62-B002-A5A4183B96A3}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.1.4.2.6359\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.1.4.2.6359\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -177,5 +163,23 @@
     <AndroidAsset Include="..\tessdata\eng.traineddata">
       <Link>Assets\tessdata\eng.traineddata</Link>
     </AndroidAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Tesseract\Tesseract.csproj">
+      <Project>{F39B9D88-09F7-4B04-9476-BF01A75E46DE}</Project>
+      <Name>Tesseract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tesseract.Binding.Droid\Tesseract.Binding.Droid.csproj">
+      <Project>{F943CAFB-0FF9-46A8-8698-95F0BE6E3A86}</Project>
+      <Name>Tesseract.Binding.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tesseract.Droid\Tesseract.Droid.csproj">
+      <Project>{75FE46B1-71EB-4525-89F9-278799B5C823}</Project>
+      <Name>Tesseract.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tesseract.Forms.Test\Tesseract.Forms.Test.csproj">
+      <Project>{ADCD6BCA-2092-4E62-B002-A5A4183B96A3}</Project>
+      <Name>Tesseract.Forms.Test</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
