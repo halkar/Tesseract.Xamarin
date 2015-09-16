@@ -14,7 +14,7 @@ namespace Tesseract.Droid.Test
         [SetUp]
         public void Setup ()
         {
-            _api = new TesseractApi (Android.App.Application.Context);
+            _api = new TesseractApi (Android.App.Application.Context, AssetsDeployment.OncePerInitialization);
         }
 
         

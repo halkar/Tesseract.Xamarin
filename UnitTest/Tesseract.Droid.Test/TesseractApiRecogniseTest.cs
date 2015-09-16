@@ -13,7 +13,7 @@ namespace Tesseract.Droid.Test
         [SetUp]
         public void Setup ()
         {
-            _api = new TesseractApi (Android.App.Application.Context);
+            _api = new TesseractApi (Android.App.Application.Context, AssetsDeployment.OncePerInitialization);
         }
 
         
@@ -163,7 +163,7 @@ namespace Tesseract.Droid.Test
         [Test]
         public async void Sample4AllModes ()
         {
-            using (_api = new TesseractApi (Android.App.Application.Context)) {
+            using (_api = new TesseractApi (Android.App.Application.Context, AssetsDeployment.OncePerInitialization)) {
                 foreach (var engineMode in Enum.GetValues(typeof(OcrEngineMode))) {
                     Console.WriteLine ("Engine mode: {0}", engineMode);
                     await _api.Init ("eng", (OcrEngineMode)engineMode);
@@ -182,7 +182,7 @@ namespace Tesseract.Droid.Test
         [Test]
         public async void Sample3AllModes ()
         {
-            using (_api = new TesseractApi (Android.App.Application.Context)) {
+            using (_api = new TesseractApi (Android.App.Application.Context, AssetsDeployment.OncePerInitialization)) {
                 foreach (var engineMode in Enum.GetValues(typeof(OcrEngineMode))) {
                     Console.WriteLine ("Engine mode: {0}", engineMode);
                     await _api.Init ("eng", (OcrEngineMode)engineMode);

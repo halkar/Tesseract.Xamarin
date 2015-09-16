@@ -30,7 +30,7 @@ namespace Tesseract.Test.Droid
         {
             base.OnCreate (bundle);
             SetContentView (Resource.Layout.Main);
-            _api = new TesseractApi (this);
+            _api = new TesseractApi (this, AssetsDeployment.OncePerInitialization);
             _api.Init ("eng");
             SurfaceView cameraSurface = FindViewById<SurfaceView> (Resource.Id.cpPreview);
             ISurfaceHolder holder = cameraSurface.Holder;

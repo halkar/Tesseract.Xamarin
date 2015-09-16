@@ -15,6 +15,7 @@ namespace Tesseract.Droid
     public class TesseractApi : ITesseractApi
     {
         private readonly Context _context;
+        private readonly AssetsDeployment _assetsDeployment;
         private readonly ProgressHandler _progressHandler = new ProgressHandler ();
         private TessBaseAPI _api;
         private volatile bool _busy;
@@ -31,8 +32,9 @@ namespace Tesseract.Droid
 
         public string Text { get; private set; }
 
-        public TesseractApi (Context context)
+        public TesseractApi (Context context, AssetsDeployment assetsDeployment)
         {
+            _assetsDeployment = assetsDeployment;
             _context = context;
             _progressHandler.Progress += (sender, e) => {
                 OnProgress (e.Progress);
@@ -56,7 +58,7 @@ namespace Tesseract.Droid
                 Initialized = result;
                 return result;
             } catch (Java.Lang.IllegalArgumentException ex) {
-                Log.Debug ("[TesseractApi]", ex, ex.Message);
+                Log.Debug ("TesseractApi", ex, ex.Message);
                 Initialized = false;
                 return false;
             }
@@ -276,14 +278,14 @@ namespace Tesseract.Droid
                 var tessdata = new File (_context.GetExternalFilesDir (null), "tessdata");
                 if (!tessdata.Exists ()) {
                     tessdata.Mkdir ();
-                } else {
+                } else if (_assetsDeployment == AssetsDeployment.OncePerVersion) {
                     var packageInfo = _context.PackageManager.GetPackageInfo (_context.PackageName, 0);
                     var version = packageInfo.VersionName;
                     var versionFile = new File (tessdata, "version");
                     if (versionFile.Exists ()) {
                         var fileVersion = System.IO.File.ReadAllText (versionFile.AbsolutePath);
                         if (version == fileVersion) {
-                            Log.Debug ("[TesseractApi]", "Application version didn't change, skipping copying assets");
+                            Log.Debug ("TesseractApi", "Application version didn't change, skipping copying assets");
                             return file.AbsolutePath;
                         }
                         versionFile.Delete ();
@@ -291,7 +293,7 @@ namespace Tesseract.Droid
                     System.IO.File.WriteAllText (versionFile.AbsolutePath, version);
                 }
 
-                Log.Debug ("[TesseractApi]", "Copy assets to " + file.AbsolutePath);
+                Log.Debug ("TesseractApi", "Copy assets to " + file.AbsolutePath);
 
                 foreach (var filename in files) {
                     using (var inStream = assetManager.Open ("tessdata/" + filename)) {
@@ -307,7 +309,7 @@ namespace Tesseract.Droid
                 }
                 return file.AbsolutePath;
             } catch (Exception ex) {
-                Log.Error ("[TesseractApi]", ex.Message);
+                Log.Error ("TesseractApi", ex.Message);
             }
             return null;
         }

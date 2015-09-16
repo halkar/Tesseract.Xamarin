@@ -27,6 +27,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 		Xamarin.Tesseract.nuspec = Xamarin.Tesseract.nuspec
+		build.sh = build.sh
+		Gruntfile.js = Gruntfile.js
+		package.json = package.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTest", "UnitTest", "{D3441B4E-A7B1-4A3A-AF53-D0D141E9BC2A}"
