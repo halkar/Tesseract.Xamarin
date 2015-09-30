@@ -20,6 +20,8 @@ namespace Tesseract.iOS
 
         private CGSize _size;
 
+        private Rectangle? _rect;
+
         public event EventHandler<ProgressEventArgs> Progress;
 
         public bool Initialized { get; private set; }
@@ -94,6 +96,9 @@ namespace Tesseract.iOS
                         using (var newImage = new UIImage (outputCiImage)) {
                             _size = newImage.Size;
                             _api.Image = newImage;
+                            if (_rect.HasValue) {
+                                _api.Rect = new CGRect (_rect.Value.Left, _rect.Value.Top, _rect.Value.Width, _rect.Value.Height);
+                            }
                             _api.Recognize ();
                             return true;
                         }
@@ -145,10 +150,10 @@ namespace Tesseract.iOS
             _api.CharBlacklist = blacklist;
         }
 
-        public void SetRectangle (Tesseract.Rectangle rect)
+        public void SetRectangle (Tesseract.Rectangle? rect)
         {
             CheckIfInitialized ();
-            _api.Rect = new CGRect (rect.Left, rect.Top, rect.Width, rect.Height);
+            _rect = rect;
         }
 
         public void Dispose ()
@@ -161,6 +166,7 @@ namespace Tesseract.iOS
 
         public void Clear ()
         {
+            _rect = null;
             Tesseract.Binding.iOS.G8Tesseract.ClearCache ();
         }
 

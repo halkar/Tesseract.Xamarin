@@ -19,6 +19,7 @@ namespace Tesseract.Droid
         private readonly ProgressHandler _progressHandler = new ProgressHandler ();
         private TessBaseAPI _api;
         private volatile bool _busy;
+        private Rectangle? _rect;
 
         /// <summary>
         /// Whitelist of characters to recognize.
@@ -119,10 +120,10 @@ namespace Tesseract.Droid
             _api.SetVariable (VAR_CHAR_BLACKLIST, blacklist);
         }
 
-        public void SetRectangle (Tesseract.Rectangle rect)
+        public void SetRectangle (Tesseract.Rectangle? rect)
         {
             CheckIfInitialized ();
-            _api.SetRectangle ((int)rect.Left, (int)rect.Top, (int)rect.Width, (int)rect.Height);
+            _rect = rect;
         }
 
         public void SetPageSegmentationMode (PageSegmentationMode mode)
@@ -219,6 +220,9 @@ namespace Tesseract.Droid
             try {
                 await Task.Run (() => {
                     _api.SetImage (bitmap);
+                    if (_rect.HasValue) {
+                        _api.SetRectangle ((int)_rect.Value.Left, (int)_rect.Value.Top, (int)_rect.Value.Width, (int)_rect.Value.Height);
+                    }
                     Text = _api.UTF8Text;
                 });
                 return true;
@@ -243,6 +247,7 @@ namespace Tesseract.Droid
 
         public void Clear ()
         {
+            _rect = null;
             _api.Clear ();
         }
 

@@ -51,6 +51,24 @@ namespace Tesseract.Droid.Test
         }
 
         [Test]
+        public async void Sample1JpgRectangle ()
+        {
+            await _api.Init ("eng");
+            using (var stream = LoadSample ("sample1.jpg")) {
+                _api.SetRectangle (new Rectangle (0, 0, 900, 100));
+                var result = await _api.SetImage (stream);
+                Assert.IsTrue (result);
+                Assert.AreEqual ("The quick brown fox", _api.Text);
+                var data = _api.Results (Tesseract.PageIteratorLevel.Block);
+                Assert.AreEqual (1, data.Count);
+                Assert.AreEqual ("The quick brown fox\n\n", data [0].Text);
+                data = _api.Results (Tesseract.PageIteratorLevel.Paragraph);
+                Assert.AreEqual (1, data.Count);
+                Assert.AreEqual ("The quick brown fox\n\n", data [0].Text);
+            }
+        }
+
+        [Test]
         public async void Sample2Png ()
         {
             await _api.Init ("eng");

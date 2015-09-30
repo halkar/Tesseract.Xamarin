@@ -74,7 +74,7 @@ namespace Tesseract
         /// SetImage. Each SetRectangle clears the recognition results so multiple
         /// rectangles can be recognized with the same image.
         /// </summary>
-        void SetRectangle (Tesseract.Rectangle rect);
+        void SetRectangle (Tesseract.Rectangle? rect);
 
         /// <summary>
         /// Set the value of an internal "parameter."
