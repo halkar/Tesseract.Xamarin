@@ -98,6 +98,8 @@ namespace Tesseract.iOS
                             _api.Image = newImage;
                             if (_rect.HasValue) {
                                 _api.Rect = new CGRect (_rect.Value.Left, _rect.Value.Top, _rect.Value.Width, _rect.Value.Height);
+                            } else {
+                                _api.Rect = new CGRect (0, 0, _size.Width, _size.Height);
                             }
                             _api.Recognize ();
                             return true;
