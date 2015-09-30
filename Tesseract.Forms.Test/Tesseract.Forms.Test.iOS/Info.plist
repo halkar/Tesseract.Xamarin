@@ -13,7 +13,7 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>MinimumOSVersion</key>
-	<string>8.3</string>
+	<string>9.0</string>
 	<key>CFBundleDisplayName</key>
 	<string>Tesseract.Forms.Test</string>
 	<key>CFBundleIdentifier</key>
