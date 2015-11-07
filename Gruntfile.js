@@ -23,12 +23,24 @@ module.exports = function (grunt) {
                     version: '<%= pkg.version %>'
                 }
             }
-        }
+        },
+        assemblyinfo: {
+            options: {
+                // Can be solutions, projects or individual assembly info files 
+                files: ['SharedAssemblyInfo.cs'],
+                // Standard assembly info 
+                info: {
+                    version: '<%= pkg.version %>.0',
+                    fileVersion: '<%= pkg.version %>.0'
+                }
+    }
+}
     });
 
     grunt.loadNpmTasks('grunt-msbuild');
     grunt.loadNpmTasks('grunt-nuget');
+    grunt.loadNpmTasks('grunt-dotnet-assembly-info');
 
-    grunt.registerTask('default', ['nugetrestore:restore', 'msbuild:release', 'nugetpack:dist']);
+    grunt.registerTask('default', ['nugetrestore:restore', 'assemblyinfo', 'msbuild:release', 'nugetpack:dist']);
 
 };
