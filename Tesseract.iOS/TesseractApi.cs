@@ -20,9 +20,7 @@ namespace Tesseract.iOS
 
         private CGSize _size;
 
-        private Rectangle? _rect;
-
-        public event EventHandler<ProgressEventArgs> Progress;
+        private CGRect? _rect;
 
         public bool Initialized { get; private set; }
 
@@ -77,7 +75,7 @@ namespace Tesseract.iOS
             }
         }
 
-        public async Task<bool> Recognise (CIImage image)
+        public async Task<bool> Recognise (UIImage image)
         {
             CheckIfInitialized ();
             if (image == null)
@@ -87,25 +85,11 @@ namespace Tesseract.iOS
             _busy = true;
             try {
                 return await Task.Run (() => {
-                    using (var blur = new CIGaussianBlur ())
-                    using (var context = CIContext.Create ()) {
-                        blur.SetDefaults ();
-                        blur.Image = image;
-                        blur.Radius = 0;
-                        using (var outputCiImage = context.CreateCGImage (blur.OutputImage, image.Extent))
-                        using (var newImage = new UIImage (outputCiImage)) {
-                            _size = newImage.Size;
-                            _api.Image = newImage;
-                            if (_rect.HasValue) {
-                                _api.Rect = new CGRect (_rect.Value.Left, _rect.Value.Top, _rect.Value.Width, _rect.Value.Height);
-                            } else {
-                                _api.Rect = new CGRect (0, 0, _size.Width, _size.Height);
-                            }
-                            _api.Recognize ();
-                            return true;
-                        }
-                    }
-
+                    _size = image.Size;
+                    _api.Image = image;
+                    _api.Rect = _rect.HasValue ? _rect.Value : new CGRect (0, 0, _size.Width, _size.Height);
+                    _api.Recognize ();
+                    return true;
                 });
             } finally {
                 _busy = false;
@@ -115,15 +99,9 @@ namespace Tesseract.iOS
         public async Task<bool> Recognise (CGImage image)
         {
             CheckIfInitialized ();
-            using (var ciImage = new CIImage (image)) {
-                return await Recognise (ciImage);
+            using (var uiImage = new UIImage (image)) {
+                return await Recognise (uiImage);
             }
-        }
-
-        public async Task<bool> Recognise (UIImage image)
-        {   
-            CheckIfInitialized ();
-            return await Recognise (image.CGImage);
         }
 
         public string Text {
@@ -155,7 +133,10 @@ namespace Tesseract.iOS
         public void SetRectangle (Tesseract.Rectangle? rect)
         {
             CheckIfInitialized ();
-            _rect = rect;
+            _rect = rect.HasValue 
+                ? new CGRect (rect.Value.Left, rect.Value.Top, rect.Value.Width, rect.Value.Height) 
+                : (CGRect?)null;
+
         }
 
         public void Dispose ()

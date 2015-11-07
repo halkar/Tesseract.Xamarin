@@ -3,6 +3,7 @@ using NUnit.Framework;
 using System.IO;
 using System.Reflection;
 using CoreImage;
+using UIKit;
 
 namespace Tesseract.iOS.Test
 {
@@ -54,14 +55,14 @@ namespace Tesseract.iOS.Test
         public async void NullImageTest ()
         {
             await _api.Init ("eng");
-            await _api.Recognise ((CIImage)null);
+            await _api.Recognise ((UIImage)null);
         }
 
         [Test]
         [ExpectedException (typeof(InvalidOperationException))]
         public async void NotInitializedTest ()
         {
-            await _api.Recognise ((CIImage)null);
+            await _api.Recognise ((UIImage)null);
         }
     }
 }

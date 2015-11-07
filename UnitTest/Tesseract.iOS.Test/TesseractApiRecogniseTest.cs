@@ -2,6 +2,9 @@
 using NUnit.Framework;
 using System.IO;
 using System.Reflection;
+using CoreImage;
+using UIKit;
+using Foundation;
 
 namespace Tesseract.iOS.Test
 {
@@ -83,10 +86,19 @@ namespace Tesseract.iOS.Test
         public async void Sample3Png ()
         {
             await _api.Init ("eng");
-            using (var stream = LoadSample ("sample3.png")) {
-                var result = await _api.SetImage (stream);
-                Assert.IsTrue (result);
-                Assert.AreEqual ("the quick brown fox\njumps over the lazy dog-\n\nTHE QUICK BROlLIN FOX\nJUMPS OVER THE LAZY DOG.\n\n", _api.Text);
+            using (var stream = LoadSample ("sample3.png"))
+            using (var image = new CIImage (NSData.FromStream (stream)))
+            using (var blur = new CIGaussianBlur ())
+            using (var context = CIContext.Create ()) {
+                blur.SetDefaults ();
+                blur.Image = image;
+                blur.Radius = 0;
+                using (var outputCiImage = context.CreateCGImage (blur.OutputImage, image.Extent))
+                using (var newImage = new UIImage (outputCiImage)) {
+                    var result = await ((TesseractApi)_api).Recognise (newImage);
+                    Assert.IsTrue (result);
+                    Assert.AreEqual ("the quick brown fox\njumps over the lazy dog-\n\nTHE QUICK BROlLIN FOX\nJUMPS OVER THE LAZY DOG.\n\n", _api.Text);
+                }
             }
         }
 
@@ -135,6 +147,21 @@ namespace Tesseract.iOS.Test
                 Assert.AreEqual ("Good font for the OCR\nDingufrfom n Me am\nhe mm mm m cm\n\nGood 60m size for ocn\n\n", _api.Text);
             }
         }
+
+
+        [Test]
+        [Ignore]
+        public async void Sample3PngPerformance ()
+        {
+            await _api.Init ("eng");
+            for (int i = 0; i < 10000; i++) {
+                using (var stream = LoadSample ("sample3.png")) {
+                    var result = await _api.SetImage (stream);
+                    Assert.IsTrue (result);
+                }
+            }
+        }
+
 
         public static Stream LoadSample (string name)
         {
