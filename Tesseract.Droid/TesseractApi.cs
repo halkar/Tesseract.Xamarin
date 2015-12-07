@@ -195,7 +195,7 @@ namespace Tesseract.Droid
                 var result = new Result {
                     Confidence = iterator.Confidence (pageIteratorLevel),
                     Text = iterator.GetUTF8Text (pageIteratorLevel),
-                    Box = new Rectangle (boundingBox [0], boundingBox [1], boundingBox [2], boundingBox [3])
+                    Box = new Rectangle (boundingBox [0], boundingBox [1], boundingBox [2] - boundingBox [0], boundingBox [3] - boundingBox [1])
                 };
                 results.Add (result);
             } while (iterator.Next (pageIteratorLevel));

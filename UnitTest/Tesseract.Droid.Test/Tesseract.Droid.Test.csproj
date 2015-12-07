@@ -66,7 +66,6 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\Icon.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\Icon.png" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Assets\tessdata\" />
     <Folder Include="samples\" />
@@ -123,20 +122,6 @@
     </AndroidAsset>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Tesseract\Tesseract.csproj">
-      <Project>{F39B9D88-09F7-4B04-9476-BF01A75E46DE}</Project>
-      <Name>Tesseract</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Tesseract.Binding.Droid\Tesseract.Binding.Droid.csproj">
-      <Project>{F943CAFB-0FF9-46A8-8698-95F0BE6E3A86}</Project>
-      <Name>Tesseract.Binding.Droid</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Tesseract.Droid\Tesseract.Droid.csproj">
-      <Project>{75FE46B1-71EB-4525-89F9-278799B5C823}</Project>
-      <Name>Tesseract.Droid</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="..\samples\sample1.jpg">
       <Link>samples\sample1.jpg</Link>
     </EmbeddedResource>
@@ -155,5 +140,20 @@
     <EmbeddedResource Include="..\samples\sample6.jpg">
       <Link>samples\sample6.jpg</Link>
     </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Tesseract\Tesseract.csproj">
+      <Project>{F39B9D88-09F7-4B04-9476-BF01A75E46DE}</Project>
+      <Name>Tesseract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tesseract.Binding.Droid\Tesseract.Binding.Droid.csproj">
+      <Project>{F943CAFB-0FF9-46A8-8698-95F0BE6E3A86}</Project>
+      <Name>Tesseract.Binding.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tesseract.Droid\Tesseract.Droid.csproj">
+      <Project>{75FE46B1-71EB-4525-89F9-278799B5C823}</Project>
+      <Name>Tesseract.Droid</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
