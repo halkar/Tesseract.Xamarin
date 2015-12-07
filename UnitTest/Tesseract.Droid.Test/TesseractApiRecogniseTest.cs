@@ -45,6 +45,7 @@ namespace Tesseract.Droid.Test
                 Assert.AreEqual ("The quick brown fox\n", data [0].Text);
                 Assert.AreEqual ("jumped over the 5\n", data [1].Text);
                 Assert.AreEqual ("lazy dogs!\n\n", data [2].Text);
+                Assert.AreEqual (new Rectangle (37, 233, 415, 89), data [2].Box);
                 data = _api.Results (Tesseract.PageIteratorLevel.Word);
                 Assert.AreEqual (10, data.Count);
             }
