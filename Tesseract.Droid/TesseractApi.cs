@@ -83,7 +83,7 @@ namespace Tesseract.Droid
             CheckIfInitialized ();
             if (data == null)
                 throw new ArgumentNullException ("data");
-            using (var bitmap = await BitmapFactory.DecodeByteArrayAsync (data, 0, data.Length, GetOptions ())) {
+            using (var bitmap = await BitmapFactory.DecodeByteArrayAsync (data, 0, data.Length, Options)) {
                 return await Recognise (bitmap);
             }
         }
@@ -93,7 +93,7 @@ namespace Tesseract.Droid
             CheckIfInitialized ();
             if (path == null)
                 throw new ArgumentNullException ("path");
-            using (var bitmap = await BitmapFactory.DecodeFileAsync (path, GetOptions ())) {
+            using (var bitmap = await BitmapFactory.DecodeFileAsync (path, Options)) {
                 return await Recognise (bitmap);
             }
         }
@@ -103,7 +103,7 @@ namespace Tesseract.Droid
             CheckIfInitialized ();
             if (stream == null)
                 throw new ArgumentNullException ("stream");
-            using (var bitmap = await BitmapFactory.DecodeStreamAsync (stream)) {
+            using (var bitmap = await BitmapFactory.DecodeStreamAsync (stream, null, Options)) {
                 return await Recognise (bitmap);
             }
         }
@@ -204,10 +204,7 @@ namespace Tesseract.Droid
 
         public event EventHandler<ProgressEventArgs> Progress;
 
-        private static BitmapFactory.Options GetOptions ()
-        {
-            return new BitmapFactory.Options { InSampleSize = 4 };
-        }
+        public BitmapFactory.Options Options { get; set; } = new BitmapFactory.Options { InSampleSize = 1 };
 
         public async Task<bool> Recognise (Bitmap bitmap)
         {
