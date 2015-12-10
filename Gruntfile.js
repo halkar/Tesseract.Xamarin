@@ -26,9 +26,7 @@ module.exports = function (grunt) {
         },
         assemblyinfo: {
             options: {
-                // Can be solutions, projects or individual assembly info files 
                 files: ['SharedAssemblyInfo.cs'],
-                // Standard assembly info 
                 info: {
                     version: '<%= pkg.version %>.0',
                     fileVersion: '<%= pkg.version %>.0'
