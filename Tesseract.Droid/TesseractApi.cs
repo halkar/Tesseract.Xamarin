@@ -43,8 +43,6 @@ namespace Tesseract.Droid
             _api = new TessBaseAPI (_progressHandler);
         }
 
-        public int ProgressValue { get; private set; }
-
         public bool Initialized { get; private set; }
 
         public async Task<bool> Init (string language, OcrEngineMode? mode = null)
@@ -266,11 +264,6 @@ namespace Tesseract.Droid
             }
         }
 
-        public void OnProgressValues (TessBaseAPI.ProgressValues progress)
-        {
-            OnProgress (progress.Percent);
-        }
-
         private async Task<string> CopyAssets ()
         {
             try {
@@ -316,9 +309,8 @@ namespace Tesseract.Droid
             return null;
         }
 
-        protected virtual void OnProgress (int progress)
+        private void OnProgress (int progress)
         {
-            ProgressValue = progress;
             var handler = Progress;
             if (handler != null)
                 handler (this, new ProgressEventArgs (progress));

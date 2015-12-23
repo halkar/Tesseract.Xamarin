@@ -82,6 +82,11 @@ namespace Tesseract
         /// <param name="key">Key.</param>
         /// <param name="value">Value.</param>
         void SetVariable (string key, string value);
+
+        /// <summary>
+        /// Progress.
+        /// </summary>
+        event EventHandler<ProgressEventArgs> Progress;
     }
 }
 

@@ -16,6 +16,8 @@ namespace Tesseract.iOS
     {
         private Tesseract.Binding.iOS.G8Tesseract _api;
 
+        private readonly ProgressHandler _progressHandler = new ProgressHandler ();
+
         private volatile bool _busy;
 
         private CGSize _size;
@@ -24,10 +26,20 @@ namespace Tesseract.iOS
 
         public bool Initialized { get; private set; }
 
+        public event EventHandler<ProgressEventArgs> Progress;
+
+        public TesseractApi ()
+        {
+            _progressHandler.Progress += (sender, e) => {
+                OnProgress (e.Progress);
+            };
+        }
+
         public async Task<bool> Init (string language, OcrEngineMode? mode = null)
         {
             try {
                 _api = new Tesseract.Binding.iOS.G8Tesseract (language);
+                _api.Delegate = _progressHandler;
                 _api.Init ();
                 if (mode.HasValue)
                     SetOcrEngineMode (mode.Value);
@@ -257,6 +269,30 @@ namespace Tesseract.iOS
         {
             if (!Initialized)
                 throw new InvalidOperationException ("Call Init first");
+        }
+
+        private void OnProgress (int progress)
+        {
+            var handler = Progress;
+            if (handler != null)
+                handler (this, new ProgressEventArgs (progress));
+        }
+
+        private class ProgressHandler : G8TesseractDelegate
+        {
+            public override void ProgressImageRecognitionForTesseract (G8Tesseract tesseract)
+            {
+                OnProgress ((int)tesseract.Progress); 
+            }
+
+            internal event EventHandler<ProgressEventArgs> Progress;
+
+            private void OnProgress (int progress)
+            {
+                var handler = Progress;
+                if (handler != null)
+                    handler (this, new ProgressEventArgs (progress));
+            }
         }
     }
 }
