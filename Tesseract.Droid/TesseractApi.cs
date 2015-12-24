@@ -6,32 +6,31 @@ using Android.Content;
 using Android.Graphics;
 using Android.Util;
 using Com.Googlecode.Tesseract.Android;
+using Java.Lang;
+using Exception = System.Exception;
 using File = Java.IO.File;
 using Object = Java.Lang.Object;
-using Java.IO;
 
 namespace Tesseract.Droid
 {
     public class TesseractApi : ITesseractApi
     {
-        private readonly Context _context;
-        private readonly AssetsDeployment _assetsDeployment;
-        private readonly ProgressHandler _progressHandler = new ProgressHandler ();
-        private TessBaseAPI _api;
-        private volatile bool _busy;
-        private Rectangle? _rect;
-
         /// <summary>
-        /// Whitelist of characters to recognize.
+        ///     Whitelist of characters to recognize.
         /// </summary>
         public const string VAR_CHAR_WHITELIST = "tessedit_char_whitelist";
 
         /// <summary>
-        /// Blacklist of characters to not recognize.
+        ///     Blacklist of characters to not recognize.
         /// </summary>
         public const string VAR_CHAR_BLACKLIST = "tessedit_char_blacklist";
 
-        public string Text { get; private set; }
+        private readonly AssetsDeployment _assetsDeployment;
+        private readonly Context _context;
+        private readonly ProgressHandler _progressHandler = new ProgressHandler ();
+        private TessBaseAPI _api;
+        private volatile bool _busy;
+        private Rectangle? _rect;
 
         public TesseractApi (Context context, AssetsDeployment assetsDeployment)
         {
@@ -43,6 +42,10 @@ namespace Tesseract.Droid
             _api = new TessBaseAPI (_progressHandler);
         }
 
+        public BitmapFactory.Options Options { get; set; } = new BitmapFactory.Options {InSampleSize = 1};
+
+        public string Text { get; private set; }
+
         public bool Initialized { get; private set; }
 
         public async Task<bool> Init (string language, OcrEngineMode? mode = null)
@@ -52,22 +55,15 @@ namespace Tesseract.Droid
             try {
                 var path = await CopyAssets ();
                 var result = mode.HasValue
-                ? _api.Init (path, language, GetOcrEngineMode (mode.Value))
-                : _api.Init (path, language);
+                    ? _api.Init (path, language, GetOcrEngineMode (mode.Value))
+                    : _api.Init (path, language);
                 Initialized = result;
                 return result;
-            } catch (Java.Lang.IllegalArgumentException ex) {
+            } catch (IllegalArgumentException ex) {
                 Log.Debug ("TesseractApi", ex, ex.Message);
                 Initialized = false;
                 return false;
             }
-        }
-
-        public async Task<bool> Init (string tessDataPath, string language)
-        {
-            var result = _api.Init (tessDataPath, language);
-            Initialized = result;
-            return result;
         }
 
         public void SetVariable (string key, string value)
@@ -80,7 +76,7 @@ namespace Tesseract.Droid
         {
             CheckIfInitialized ();
             if (data == null)
-                throw new ArgumentNullException ("data");
+                throw new ArgumentNullException (nameof (data));
             using (var bitmap = await BitmapFactory.DecodeByteArrayAsync (data, 0, data.Length, Options)) {
                 return await Recognise (bitmap);
             }
@@ -90,7 +86,7 @@ namespace Tesseract.Droid
         {
             CheckIfInitialized ();
             if (path == null)
-                throw new ArgumentNullException ("path");
+                throw new ArgumentNullException (nameof (path));
             using (var bitmap = await BitmapFactory.DecodeFileAsync (path, Options)) {
                 return await Recognise (bitmap);
             }
@@ -100,7 +96,7 @@ namespace Tesseract.Droid
         {
             CheckIfInitialized ();
             if (stream == null)
-                throw new ArgumentNullException ("stream");
+                throw new ArgumentNullException (nameof (stream));
             using (var bitmap = await BitmapFactory.DecodeStreamAsync (stream, null, Options)) {
                 return await Recognise (bitmap);
             }
@@ -118,7 +114,7 @@ namespace Tesseract.Droid
             _api.SetVariable (VAR_CHAR_BLACKLIST, blacklist);
         }
 
-        public void SetRectangle (Tesseract.Rectangle? rect)
+        public void SetRectangle (Rectangle? rect)
         {
             CheckIfInitialized ();
             _rect = rect;
@@ -178,15 +174,15 @@ namespace Tesseract.Droid
             }
         }
 
-        public List<Result> Results (Tesseract.PageIteratorLevel level)
-        {	
+        public IEnumerable<Result> Results (Tesseract.PageIteratorLevel level)
+        {
             CheckIfInitialized ();
             var pageIteratorLevel = GetPageIteratorLevel (level);
-            int[] boundingBox;
-            var results = new List<Result> ();
             var iterator = _api.ResultIterator;
             if (iterator == null)
-                return new List<Result> ();
+                yield break;
+            // ReSharper disable once TooWideLocalVariableScope
+            int[] boundingBox;
             iterator.Begin ();
             do {
                 boundingBox = iterator.GetBoundingBox (pageIteratorLevel);
@@ -195,20 +191,30 @@ namespace Tesseract.Droid
                     Text = iterator.GetUTF8Text (pageIteratorLevel),
                     Box = new Rectangle (boundingBox [0], boundingBox [1], boundingBox [2] - boundingBox [0], boundingBox [3] - boundingBox [1])
                 };
-                results.Add (result);
+                yield return result;
             } while (iterator.Next (pageIteratorLevel));
-            return results;
         }
 
         public event EventHandler<ProgressEventArgs> Progress;
 
-        public BitmapFactory.Options Options { get; set; } = new BitmapFactory.Options { InSampleSize = 1 };
+        public void Clear ()
+        {
+            _rect = null;
+            _api.Clear ();
+        }
+
+        public async Task<bool> Init (string tessDataPath, string language)
+        {
+            var result = _api.Init (tessDataPath, language);
+            Initialized = result;
+            return result;
+        }
 
         public async Task<bool> Recognise (Bitmap bitmap)
         {
             CheckIfInitialized ();
             if (bitmap == null)
-                throw new ArgumentNullException ("bitmap");
+                throw new ArgumentNullException (nameof (bitmap));
             if (_busy)
                 return false;
             _busy = true;
@@ -216,7 +222,8 @@ namespace Tesseract.Droid
                 await Task.Run (() => {
                     _api.SetImage (bitmap);
                     if (_rect.HasValue) {
-                        _api.SetRectangle ((int)_rect.Value.Left, (int)_rect.Value.Top, (int)_rect.Value.Width, (int)_rect.Value.Height);
+                        _api.SetRectangle ((int)_rect.Value.Left, (int)_rect.Value.Top, (int)_rect.Value.Width,
+                            (int)_rect.Value.Height);
                     }
                     Text = _api.UTF8Text;
                 });
@@ -240,12 +247,6 @@ namespace Tesseract.Droid
             }
         }
 
-        public void Clear ()
-        {
-            _rect = null;
-            _api.Clear ();
-        }
-
         private int GetPageIteratorLevel (Tesseract.PageIteratorLevel level)
         {
             switch (level) {
@@ -267,9 +268,9 @@ namespace Tesseract.Droid
         private async Task<string> CopyAssets ()
         {
             try {
-                Android.Content.Res.AssetManager assetManager = _context.Assets;
-                string[] files = assetManager.List ("tessdata");
-                File file = _context.GetExternalFilesDir (null);
+                var assetManager = _context.Assets;
+                var files = assetManager.List ("tessdata");
+                var file = _context.GetExternalFilesDir (null);
                 var tessdata = new File (_context.GetExternalFilesDir (null), "tessdata");
                 if (!tessdata.Exists ()) {
                     tessdata.Mkdir ();
@@ -312,8 +313,7 @@ namespace Tesseract.Droid
         private void OnProgress (int progress)
         {
             var handler = Progress;
-            if (handler != null)
-                handler (this, new ProgressEventArgs (progress));
+            handler?.Invoke (this, new ProgressEventArgs (progress));
         }
 
         private void CheckIfInitialized ()
@@ -334,8 +334,7 @@ namespace Tesseract.Droid
             private void OnProgress (int progress)
             {
                 var handler = Progress;
-                if (handler != null)
-                    handler (this, new ProgressEventArgs (progress));
+                handler?.Invoke (this, new ProgressEventArgs (progress));
             }
         }
     }

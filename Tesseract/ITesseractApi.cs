@@ -39,7 +39,7 @@ namespace Tesseract
         /// Get all results.
         /// </summary>
         /// <param name="level">Block, paragraph, line, word, symbol</param>
-        List<Result> Results (PageIteratorLevel level);
+        IEnumerable<Result> Results (PageIteratorLevel level);
 
         /// <summary>
         /// Is library initialised.
