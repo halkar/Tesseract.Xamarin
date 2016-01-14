@@ -50,6 +50,18 @@
     <EmbeddedNativeLibrary Include="Jars\x86\libtess.so" />
     <EmbeddedNativeLibrary Include="Jars\armeabi-v7a\libpngt.so" />
     <EmbeddedNativeLibrary Include="Jars\x86\libpngt.so" />
+    <EmbeddedNativeLibrary Include="Jars\mips\liblept.so" />
+    <EmbeddedNativeLibrary Include="Jars\mips\libpngt.so" />
+    <EmbeddedNativeLibrary Include="Jars\mips\libtess.so" />
+    <EmbeddedNativeLibrary Include="Jars\mips64\liblept.so" />
+    <EmbeddedNativeLibrary Include="Jars\mips64\libpngt.so" />
+    <EmbeddedNativeLibrary Include="Jars\mips64\libtess.so" />
+    <EmbeddedNativeLibrary Include="Jars\x86_64\liblept.so" />
+    <EmbeddedNativeLibrary Include="Jars\x86_64\libpngt.so" />
+    <EmbeddedNativeLibrary Include="Jars\x86_64\libtess.so" />
+    <EmbeddedNativeLibrary Include="Jars\arm64-v8a\liblept.so" />
+    <EmbeddedNativeLibrary Include="Jars\arm64-v8a\libpngt.so" />
+    <EmbeddedNativeLibrary Include="Jars\arm64-v8a\libtess.so" />
   </ItemGroup>
   <ItemGroup>
     <TransformFile Include="Transforms\Metadata.xml">
