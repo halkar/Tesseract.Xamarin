@@ -13,7 +13,7 @@ Best way to use Xamarin.Tesseract is to add [Nuget package](https://www.nuget.or
     await api.Init ("eng");
     await api.SetImage("image_path");
     string text = api.Text;
-You will also need [tessdata](https://code.google.com/p/tesseract-ocr/downloads/list) files for the languges you need.
+You will also need [tessdata](https://github.com/tesseract-ocr/tessdata) files for the languges you need.
 In Android application `tessdata` folder should be in your assets directory and files should be marked as `AndroidAssets`. In iOS project `testate` should be in `Resources` and files should be marked as `BundleResource`. You can add more than one language in the same folder. In this case use "+"-separated list of languages to initialise `TesseractApi`.
 ##License
 Tesseract.Xamarin is distributed under the MIT license (see LICENSE).

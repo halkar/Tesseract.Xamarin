@@ -59,7 +59,7 @@ namespace Tesseract.iOS
             _api.SetVariableValue (value, key);
         }
 
-        public async Task<bool> SetImage (byte[] data)
+        public async Task<bool> SetImage (byte [] data)
         {
             CheckIfInitialized ();
             if (data == null)
@@ -93,6 +93,17 @@ namespace Tesseract.iOS
             get {
                 CheckIfInitialized ();
                 return _api.RecognizedText;
+            }
+        }
+
+        public double MaximumRecognitionTime {
+            get {
+                CheckIfInitialized ();
+                return _api.MaximumRecognitionTime;
+            }
+            set {
+                CheckIfInitialized ();
+                _api.MaximumRecognitionTime = value;
             }
         }
 

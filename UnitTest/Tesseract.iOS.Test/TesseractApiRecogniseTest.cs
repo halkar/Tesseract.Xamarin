@@ -25,12 +25,12 @@ namespace Tesseract.iOS.Test
             _api = null;
         }
 
-        private ITesseractApi _api;
+        private TesseractApi _api;
 
 
         public static Stream LoadSample (string name)
         {
-            var assembly = Assembly.GetAssembly (typeof(TesseractApiRecogniseTest));
+            var assembly = Assembly.GetAssembly (typeof (TesseractApiRecogniseTest));
             return assembly.GetManifestResourceStream ("Tesseract.iOS.Test.samples." + name);
         }
 
@@ -166,10 +166,10 @@ namespace Tesseract.iOS.Test
         }
 
         [Test]
-        [Ignore]
         public async void Sample6BigFile ()
         {
             await _api.Init ("eng");
+            _api.MaximumRecognitionTime = 1;
             using (var stream = LoadSample ("sample6.jpg")) {
                 var result = await _api.SetImage (stream);
                 Assert.IsTrue (result);
