@@ -16,6 +16,10 @@ namespace Tesseract
         Task<bool> Init (string lang, OcrEngineMode? mode = null);
 
         /// <summary>
+        /// Initialise Tesseract OCR with a custom tessdata dir. This method should be called before using Tesseract.
+        /// </summary>
+        Task<bool> Init(string lang, string absoluteDataPath, OcrEngineMode? mode = null);
+        /// <summary>
         /// Recognise image.
         /// </summary>
         Task<bool> SetImage (string path);
