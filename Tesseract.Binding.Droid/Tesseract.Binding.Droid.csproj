@@ -44,24 +44,6 @@
   <ItemGroup>
     <None Include="Jars\AboutJars.txt" />
     <None Include="Additions\AboutAdditions.txt" />
-    <EmbeddedNativeLibrary Include="Jars\armeabi-v7a\liblept.so" />
-    <EmbeddedNativeLibrary Include="Jars\armeabi-v7a\libtess.so" />
-    <EmbeddedNativeLibrary Include="Jars\x86\liblept.so" />
-    <EmbeddedNativeLibrary Include="Jars\x86\libtess.so" />
-    <EmbeddedNativeLibrary Include="Jars\armeabi-v7a\libpngt.so" />
-    <EmbeddedNativeLibrary Include="Jars\x86\libpngt.so" />
-    <EmbeddedNativeLibrary Include="Jars\mips\liblept.so" />
-    <EmbeddedNativeLibrary Include="Jars\mips\libpngt.so" />
-    <EmbeddedNativeLibrary Include="Jars\mips\libtess.so" />
-    <EmbeddedNativeLibrary Include="Jars\mips64\liblept.so" />
-    <EmbeddedNativeLibrary Include="Jars\mips64\libpngt.so" />
-    <EmbeddedNativeLibrary Include="Jars\mips64\libtess.so" />
-    <EmbeddedNativeLibrary Include="Jars\x86_64\liblept.so" />
-    <EmbeddedNativeLibrary Include="Jars\x86_64\libpngt.so" />
-    <EmbeddedNativeLibrary Include="Jars\x86_64\libtess.so" />
-    <EmbeddedNativeLibrary Include="Jars\arm64-v8a\liblept.so" />
-    <EmbeddedNativeLibrary Include="Jars\arm64-v8a\libpngt.so" />
-    <EmbeddedNativeLibrary Include="Jars\arm64-v8a\libtess.so" />
   </ItemGroup>
   <ItemGroup>
     <TransformFile Include="Transforms\Metadata.xml">
@@ -72,6 +54,36 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedJar Include="Jars\classes.jar" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedNativeLibrary Include="Jars\arm64-v8a\libjpgt.so" />
+    <EmbeddedNativeLibrary Include="Jars\arm64-v8a\liblept.so" />
+    <EmbeddedNativeLibrary Include="Jars\arm64-v8a\libpngt.so" />
+    <EmbeddedNativeLibrary Include="Jars\arm64-v8a\libtess.so" />
+    <EmbeddedNativeLibrary Include="Jars\armeabi\libjpgt.so" />
+    <EmbeddedNativeLibrary Include="Jars\armeabi\liblept.so" />
+    <EmbeddedNativeLibrary Include="Jars\armeabi\libpngt.so" />
+    <EmbeddedNativeLibrary Include="Jars\armeabi\libtess.so" />
+    <EmbeddedNativeLibrary Include="Jars\armeabi-v7a\libjpgt.so" />
+    <EmbeddedNativeLibrary Include="Jars\armeabi-v7a\liblept.so" />
+    <EmbeddedNativeLibrary Include="Jars\armeabi-v7a\libpngt.so" />
+    <EmbeddedNativeLibrary Include="Jars\armeabi-v7a\libtess.so" />
+    <EmbeddedNativeLibrary Include="Jars\mips\libjpgt.so" />
+    <EmbeddedNativeLibrary Include="Jars\mips\liblept.so" />
+    <EmbeddedNativeLibrary Include="Jars\mips\libpngt.so" />
+    <EmbeddedNativeLibrary Include="Jars\mips\libtess.so" />
+    <EmbeddedNativeLibrary Include="Jars\mips64\libjpgt.so" />
+    <EmbeddedNativeLibrary Include="Jars\mips64\liblept.so" />
+    <EmbeddedNativeLibrary Include="Jars\mips64\libpngt.so" />
+    <EmbeddedNativeLibrary Include="Jars\mips64\libtess.so" />
+    <EmbeddedNativeLibrary Include="Jars\x86\libjpgt.so" />
+    <EmbeddedNativeLibrary Include="Jars\x86\liblept.so" />
+    <EmbeddedNativeLibrary Include="Jars\x86\libpngt.so" />
+    <EmbeddedNativeLibrary Include="Jars\x86\libtess.so" />
+    <EmbeddedNativeLibrary Include="Jars\x86_64\libjpgt.so" />
+    <EmbeddedNativeLibrary Include="Jars\x86_64\liblept.so" />
+    <EmbeddedNativeLibrary Include="Jars\x86_64\libpngt.so" />
+    <EmbeddedNativeLibrary Include="Jars\x86_64\libtess.so" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
