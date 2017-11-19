@@ -14,7 +14,7 @@
         <file src="Tesseract.Droid/bin/Release/Tesseract.Binding.Droid.dll" target="lib/MonoAndroid10/Tesseract.Binding.Droid.dll" />
         <file src="Tesseract.Droid/bin/Release/Tesseract.dll" target="lib/MonoAndroid10/Tesseract.dll" />
         <file src="Tesseract.Droid/bin/Release/Tesseract.Droid.dll" target="lib/MonoAndroid10/Tesseract.Droid.dll" />
-        <file src="Tesseract/bin/Release/Tesseract.dll" target="lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/Tesseract.dll" />
+        <file src="Tesseract/bin/Release/Tesseract.dll" target="lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20/Tesseract.dll" />
         <file src="Tesseract.iOS/bin/iPhone/Release/Tesseract.Binding.iOS.dll" target="lib/Xamarin.iOS10/Tesseract.Binding.iOS.dll" />
         <file src="Tesseract.iOS/bin/iPhone/Release/Tesseract.dll" target="lib/Xamarin.iOS10/Tesseract.dll" />
         <file src="Tesseract.iOS/bin/iPhone/Release/Tesseract.iOS.dll" target="lib/Xamarin.iOS10/Tesseract.iOS.dll" />
