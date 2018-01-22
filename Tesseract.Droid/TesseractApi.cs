@@ -233,6 +233,44 @@ namespace Tesseract.Droid
             }
         }
 
+        public string GetHOCRText (int page)
+        {
+            return _api.GetHOCRText (page);
+        }
+
+        public void Stop ()
+        {
+            _api.Stop ();
+        }
+
+        public void End ()
+        {
+            _api.End ();
+        }
+
+        public void BeginDocument (TessPdfRenderer tessPdfRenderer, string title = null)
+        {
+            if (title == null)
+                _api.BeginDocument (tessPdfRenderer);
+            else
+                _api.BeginDocument (tessPdfRenderer, title);
+        }
+
+        public void EndDocument (TessPdfRenderer tessPdfRenderer)
+        {
+            _api.EndDocument (tessPdfRenderer);
+        }
+
+        public void AddPageToDocument (Com.Googlecode.Leptonica.Android.Pix imageToProcess, string imageToWrite, TessPdfRenderer tessPdfRenderer)
+        {
+            _api.AddPageToDocument (imageToProcess, imageToWrite, tessPdfRenderer);
+        }
+
+        public void ReadConfigFile (string fileName)
+        {
+            _api.ReadConfigFile (fileName);
+        }
+
         private int GetOcrEngineMode (OcrEngineMode mode)
         {
             switch (mode) {
