@@ -24,7 +24,7 @@ namespace Tesseract.Droid.Test
             _api = null;
         }
 
-        private ITesseractApi _api;
+        private TesseractApi _api;
 
         public static Stream LoadSample (string name)
         {
@@ -241,6 +241,18 @@ namespace Tesseract.Droid.Test
                 var result = await _api.SetImage (stream);
                 Assert.IsTrue (result);
                 Assert.IsTrue (_api.Text.Contains ("Good font for the OCR"));
+            }
+        }
+
+        [Test]
+        public async void Sample4HOCRText ()
+        {
+            await _api.Init ("eng", OcrEngineMode.TesseractOnly);
+            using (var stream = LoadSample ("sample4.jpg")) {
+                var result = await _api.SetImage (stream);
+                Assert.IsTrue (result);
+                var htmlResult = _api.GetHOCRText (0);
+                Assert.IsTrue (htmlResult.Contains ("Good font for the OCR"));
             }
         }
 
