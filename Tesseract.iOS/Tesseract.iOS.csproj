@@ -53,7 +53,7 @@
       <Name>Tesseract.Binding.iOS</Name>
     </ProjectReference>
     <ProjectReference Include="..\Tesseract\Tesseract.csproj">
-      <Project>{F39B9D88-09F7-4B04-9476-BF01A75E46DE}</Project>
+      <Project>{14459988-FA5B-4A1E-B1AA-970A76018D77}</Project>
       <Name>Tesseract</Name>
     </ProjectReference>
   </ItemGroup>
