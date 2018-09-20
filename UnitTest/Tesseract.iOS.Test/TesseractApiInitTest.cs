@@ -63,6 +63,14 @@ namespace Tesseract.iOS.Test
             var result = await _api.Init (null);
             Assert.IsFalse (result);
         }
+
+        // Failing test due to G8Tesseract constructor issue.
+        [Test]
+        public async void InitWithAbsoluteDataPath ()
+        {
+            var result = await _api.Init (null, "/Volumes/MacintoshHD/Users/mvassilev/temp/Resources/", OcrEngineMode.TesseractCubeCombined);
+            Assert.IsTrue (result);
+        }
     }
 }
 

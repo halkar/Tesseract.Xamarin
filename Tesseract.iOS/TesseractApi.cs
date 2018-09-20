@@ -53,6 +53,37 @@ namespace Tesseract.iOS
             return Initialized;
         }
 
+        public async Task<bool> Init(string language, string absoluteDataPath, OcrEngineMode? mode = null)
+        {
+            try
+            {
+                // Just some random configDictionary, so that it is not null
+                NSMutableDictionary configDictionary = new NSMutableDictionary();
+                configDictionary.SetValueForKey(new Foundation.NSString("kG8ParamTesseditCharWhitelist"), new Foundation.NSString("123456789"));
+                configDictionary.SetValueForKey(new Foundation.NSString("kG8ParamLoadSystemDawg"), new Foundation.NSString("F"));
+                configDictionary.SetValueForKey(new Foundation.NSString("kG8ParamLoadFreqDawg"), new Foundation.NSString("F"));
+
+                // Same here
+                NSObject[] configFileNames = { };
+
+                // Or any other dir containg a tessdata dir.
+                var resourceDir = "/Volumes/MacintoshHD/Users/mvassilev/temp/Resources/";
+
+                // The overload of G8Tesseract constructor with absoluteDataDir
+                _api = new G8Tesseract(language, configDictionary, configFileNames, resourceDir, G8OCREngineMode.TesseractCubeCombined, true) { Delegate = _progressHandler };
+                //_api = new G8Tesseract(language) { Delegate = _progressHandler };
+                _api.Init();
+                if (mode.HasValue)
+                    SetOcrEngineMode(mode.Value);
+                Initialized = true;
+            }
+            catch (Exception e)
+            {
+                Initialized = false;
+            }
+            return Initialized;
+        }
+
         public void SetVariable (string key, string value)
         {
             CheckIfInitialized ();
